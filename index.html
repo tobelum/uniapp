@@ -37,9 +37,9 @@
                     alert("status is "+status);
                     return;
                 }
-                alert("hey");
-                alert(xhr.responseText);
-                alert("there");
+                // alert("hey");
+                // alert(xhr.responseText);
+                // alert("there");
 
                 window.location="personal.html";
             }
@@ -51,11 +51,11 @@
                 email=$("#email").val();
                 pword=$("#pword").val();
 
-                pageUrl="studentsajax.php?cmd=1&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&pword="+pword+"&phone="+phone;
+                pageUrl="applicantsajax.php?cmd=1&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&pword="+pword+"&phone="+phone;
 
                 $.ajax(pageUrl,{async:true,complete:addUserComplete});
                 alert("Thank you for registering, you can now sign in using your details.");
-                //prompt('url',pageUrl);
+                // prompt('url',pageUrl);
            }
 
            function logUserComplete(xhr,status){
@@ -64,30 +64,30 @@
                 //spanSignup.innerHTML="Sign Up Unsuccessful";
                 return;
                 }
-                //alert("hello");
+                // alert("hello");
                 console.log(xhr.responseText);
                 var obj= $.parseJSON(xhr.responseText);
                 
-                //alert("object is "+obj);
+                // alert("object is "+obj);
                 
-                //alert("hey");
+                // alert("hey");
                 if(obj.result==0){
                     alert("server response: "+obj.message);
                     
                     //spanSignup.innerHTML=obj.message;
                     console.log(obj.message);
                 }else{
-                    alert("Welcome, you have successfully logged in.");
-                    window.location="home.html";
+                    // alert("Welcome, you have successfully logged in.");
+                    window.location="personal.html";
                     
                 }
            }
 
            function logUser(){
-                username=$("#loguser").val();
-                password=$("#logpassword").val();
+                email=$("#logemail").val();
+                pword=$("#logpassword").val();
 
-                pageUrl="http://52.89.116.249/~tobel.eze-okoli/finder/usersajax.php?cmd=2&username="+username+"&password="+password;
+                pageUrl="applicantsajax.php?cmd=2&email="+email+"&pword="+pword;
                 $.ajax(pageUrl,{async:true,complete:logUserComplete});
                 alert("Thank you for returning, please wait a moment while we retrieve your information.");
                 //prompt('url',pageUrl);
@@ -133,14 +133,14 @@
 	                            <div class="form-bottom">
 				                    <form role="form" action="" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="form-username">Email</label>
+				                        	<input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="logemail">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="logpassword">
 				                        </div>
-				                        <button type="submit" class="btn">Sign in!</button>
+				                        <button type="submit" class="btn" onclick="logUser()">Sign in!</button>
 				                    </form>
 			                    </div>
 		                    </div>
@@ -197,7 +197,7 @@
 				                        </div>
                                         <div class="form-group">
                                             <label class="sr-only">Password</label>
-                                            <input type="text" placeholder="Password..." class="form-last-name form-control" id="pword">
+                                            <input type="password" placeholder="Password..." class="form-last-name form-control" id="pword">
                                         </div>
 				                        <button type="submit" class="btn" onclick ="addUser()">Sign me up!</button>
 				                    </form>

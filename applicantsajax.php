@@ -25,8 +25,8 @@ function signup() {
 		return;
 	}
 	
-	include_once("students.php");
-	$obj = new students();
+	include_once("applicants.php");
+	$obj = new applicants();
 	$firstname = $_REQUEST['firstname'];
 	$lastname = $_REQUEST['lastname'];
 	$email = $_REQUEST['email'];
@@ -51,8 +51,8 @@ function login(){
 		return;
 	}
 	
-	include_once("students.php");
-	$obj = new students();
+	include_once("applicants.php");
+	$obj = new applicants();
 	$email = $_REQUEST['email'];
 	$pword = $_REQUEST['pword'];
 	
@@ -64,7 +64,11 @@ function login(){
 	
 	else {
 
-	 echo '{"result":1, "message": "Login Successful"}';	
+	 echo '{"result":1, "message": "Login Successful"}';
+	 $row=$obj->fetch();
+	 session_start();
+	 $_SESSION['applicantid']=$row['applicantid'];
+
 	}
 }
 
