@@ -1,4 +1,7 @@
 <?php
+	
+	session_start();	
+
 	if (!isset($_REQUEST['cmd'])) {
 		echo '{"result": 0, "message": "Command not entered"}';
 	}
@@ -57,17 +60,20 @@ function login(){
 	$pword = $_REQUEST['pword'];
 	
 	$result = $obj->login($email,$pword);
-
-	if ($result==false) {
+	$row=$obj->fetch();
+	//var_dump($row);
+	if (!$row) {
 		echo '{"result":0 ,"message": "Login Failed"}';
 	}
 	
 	else {
 
 	 echo '{"result":1, "message": "Login Successful"}';
-	 $row=$obj->fetch();
-	 session_start();
+	
+	 // session_destroy();
+	 // session_start();
 	 $_SESSION['applicantid']=$row['applicantid'];
+	 // echo $_SESSION['applicantid'];
 
 	}
 }

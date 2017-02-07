@@ -38,6 +38,7 @@ class applicants extends adb{
 
      function login($email='none',$pword='none'){
           $strQuery="select applicantid from applicant where email='$email' and pword='$pword'";
+          
           return $this->query($strQuery);
      }
 
