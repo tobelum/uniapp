@@ -15,6 +15,10 @@
 		login();
 		break;
 
+		case 3:
+		fillPersonal();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -75,6 +79,52 @@ function login(){
 	 $_SESSION['applicantid']=$row['applicantid'];
 	 // echo $_SESSION['applicantid'];
 
+	}
+}
+
+function fillPersonal(){
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$title = $_REQUEST['title'];
+	$email = $_REQUEST['email'];
+	$firstname = $_REQUEST['firstname'];
+	$lastname = $_REQUEST['lastname'];
+	$gender = $_REQUEST['gender'];
+	$nationality = $_REQUEST['nationality'];
+	$passport = $_REQUEST['passport'];
+	$expirydate = $_REQUEST['expirydate'];
+	$street = $_REQUEST['street'];
+	$town = $_REQUEST['town'];
+	$region = $_REQUEST['region'];
+	$country = $_REQUEST['country'];
+	$birthdate = $_REQUEST['birthdate'];
+	$phone = $_REQUEST['phone'];
+	$livewith = $_REQUEST['livewith'];
+	$married = $_REQUEST['married'];
+	$disable = $_REQUEST['disable'];
+	$disability = $_REQUEST['disability'];
+	$insurance = $_REQUEST['insurance'];
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$result = $obj->getApplicant($applicantid);
+	$row = $obj->fetch();
+	var_dump($row);
+
+	if(!$row){
+		echo '{"result":0 ,"message": "Profile could not be retrieved."}';
+	}else{
+		$sub = new applicants();
+		$res=$sub->updatePersonal($applicantid,$title,$email,$firstname,$lastname,$gender,$nationality,$passport,$expirydate,$street,$town,$region,$country,$birthdate,$phone,$livewith,$married,$disable,$disability,$insurance);
+			$r=$sub->fetch();
+			var_dump($r);
+
+			if (!$r) {
+				echo '{"result":0 ,"message": "Profile failed to update."}';
+			}else{
+	 			echo '{"result":1, "message": "Profile updated."}';
+			}
 	}
 }
 
