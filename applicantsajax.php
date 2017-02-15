@@ -108,24 +108,24 @@ function fillPersonal(){
 
 	$applicantid = $_SESSION['applicantid'];
 
-	$result = $obj->getApplicant($applicantid);
-	$row = $obj->fetch();
-	var_dump($row);
+	// $result = $obj->getApplicant($applicantid);
+	// $row = $obj->fetch();
+	// var_dump($row);
 
-	if(!$row){
-		echo '{"result":0 ,"message": "Profile could not be retrieved."}';
-	}else{
-		$sub = new applicants();
-		$res=$sub->updatePersonal($applicantid,$title,$email,$firstname,$lastname,$gender,$nationality,$passport,$expirydate,$street,$town,$region,$country,$birthdate,$phone,$livewith,$married,$disable,$disability,$insurance);
-			$r=$sub->fetch();
-			var_dump($r);
+	// if(!$row){
+	// 	echo '{"result":0 ,"message": "Profile could not be retrieved."}';
+	// }else{
+		$obj = new applicants();
+		$result=$obj->updatePersonal($applicantid,$title,$email,$firstname,$lastname,$gender,$nationality,$passport,$expirydate,$street,$town,$region,$country,$birthdate,$phone,$livewith,$married,$disable,$disability,$insurance);
+			// $r=$obj->fetch();
+			var_dump($result);
 
-			if (!$r) {
+			if (!$result) {
 				echo '{"result":0 ,"message": "Profile failed to update."}';
 			}else{
 	 			echo '{"result":1, "message": "Profile updated."}';
 			}
-	}
+	// }
 }
 
 
