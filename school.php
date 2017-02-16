@@ -25,11 +25,6 @@ class school extends adb{
           return $this->query($strQuery);
      }
 
-     function getSchool($schoolid='none'){
-        $strQuery="select * from school where schoolid = '$schoolid'";
-        return $this->query($strQuery);
-     }
-
 
    }
 

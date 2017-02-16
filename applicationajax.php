@@ -12,7 +12,7 @@
 		break;
 
 		case 2:
-		getSchool();
+		getMySchools();
 		break;
 
 		default:
@@ -28,41 +28,59 @@ function getSchools() {
 	
 	$a = $obj->getSchools();
 
-	$result = $obj->getSchool($schoolid);
-	$row=$obj->fetch();
+	$result = $obj->getSchools();
 
-	if (!$a) {
+
+
+	if (!$result) {
 		echo '{"result":0 ,"message": "Could not display schools"}';
 	}
 	
 	else {
-	 echo '{"result":1, "message": "Schools retrieved"}';	
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
 	}
 	
 }
 
-function getSchool(){
-	if (($_REQUEST['schoolid']=="")) {
-		echo '{"result":0, "message": "SchoolID was not given"}';
-		return;
-	}
+function getMySchools() {
+
+	include_once("application.php");
+	$obj = new application();
 	
-	include_once("school.php");
-	$obj = new school();
-	$schoolid = $_REQUEST['schoolid'];
-	
-	$result = $obj->getSchool($schoolid);
-	$row=$obj->fetch();
-	//var_dump($row);
-	if (!$row) {
-		echo '{"result":0 ,"message": "School could not selected"}';
+	$a = $obj->getMySchools();
+
+	$result = $obj->getMySchools();
+
+
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display schools"}';
 	}
 	
 	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
 
-	 echo '{"result":1, "message": "School was selected"}';
-
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
 	}
+	
 }
 
 
