@@ -15,6 +15,10 @@
 		getMySchools();
 		break;
 
+		case 3:
+		addSchool();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -26,7 +30,7 @@ function getSchools() {
 	include_once("school.php");
 	$obj = new school();
 	
-	$a = $obj->getSchools();
+	// $a = $obj->getSchools();
 
 	$result = $obj->getSchools();
 
@@ -56,10 +60,12 @@ function getMySchools() {
 
 	include_once("application.php");
 	$obj = new application();
-	
-	$a = $obj->getMySchools();
 
-	$result = $obj->getMySchools();
+	$applicantid = $_SESSION['applicantid'];
+	
+	// $a = $obj->getMySchools();
+
+	$result = $obj->getMySchools($applicantid);
 
 
 
@@ -79,6 +85,30 @@ function getMySchools() {
 			}
 		}
 		echo "]}";	
+	}
+	
+}
+
+function addSchool() {
+	if (($_REQUEST['schoolid']=="")) {
+		echo '{"result":0, "message": "Schoolid was not given"}';
+		return;
+	}
+	
+	include_once("application.php");
+	$obj = new application();
+	$schoolid= $_REQUEST['schoolid'];
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$a = $obj->addSchool($applicantid,$schoolid);
+
+	if (!$a) {
+		echo '{"result":0 ,"message": "Could not add school"}';
+	}
+	
+	else {
+	 echo '{"result": 1, "message": "School added"}';	
 	}
 	
 }

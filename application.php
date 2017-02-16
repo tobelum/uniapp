@@ -27,7 +27,7 @@ class application extends adb{
      }
 
      function getMySchools($applicantid='none'){
-        $strQuery="select * from application where applicantid = '$applicantid'";
+        $strQuery="select school.name,school.schoolid from school,application where application.applicantid = '$applicantid' && application.schoolid=school.schoolid";
         return $this->query($strQuery);
      }
 

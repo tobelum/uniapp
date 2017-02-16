@@ -87,6 +87,35 @@
         $.ajax(pageUrl,{async:true, complete:getMySchoolsComplete});
     }
 
+        function addSchoolComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    alert("status is "+status);
+                    alert("School could not be added");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="schools.html";
+
+            }
+         }
+
+        function addSchool(schoolid){
+                var pageUrl="applicationajax.php?cmd=3&schoolid="+schoolid;
+                $.ajax(pageUrl,{async:true,complete:addSchoolComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
+
     </script>
 </head>
 <body onload="getSchools(); getMySchools()">
