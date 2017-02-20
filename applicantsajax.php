@@ -19,6 +19,10 @@
 		fillPersonal();
 		break;
 
+		case 4:
+		getPersonal();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -126,6 +130,38 @@ function fillPersonal(){
 	 			echo '{"result":1, "message": "Profile updated."}';
 			}
 	// }
+}
+
+function getPersonal() {
+
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$applicantid = $_SESSION['applicantid'];
+	
+
+	$result = $obj->getApplicant($applicantid);
+
+
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display Personal information"}';
+	}
+	
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
+	}
+	
 }
 
 

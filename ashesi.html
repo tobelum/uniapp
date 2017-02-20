@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Personal - UniApp</title>
+	<title>Ashesi University - UniApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -74,52 +74,9 @@
 
         }
 
-        function getPersonalComplete(){
-             if(status!="success"){
-                    alert("status is "+status);
-                    alert("Personal information could not be displayed");
-                    return;
-                }
-                
-            var obj= $.parseJSON(xhr.responseText); 
-            if(obj.result==0){
-                alert("server response: "+obj.message);
-            }else{
-
-            $("#applicantid").val() = obj.row['applicantid'];
-            $("#title").val() = obj.row['title'];
-            $("#email").val() = obj.row['email'];
-            firstname=$("#firstname").val();
-            lastname=$("#lastname").val();
-            gender=$("#gender").val();
-            nationality=$("#nationality").val();
-            passport=$("#passport").val();
-            expirydate=$("#expirydate").val();
-            street=$("#street").val();
-            town=$("#town").val();
-            region=$("#region").val();
-            country=$("#country").val();
-            birthdate=$("#birthdate").val();
-            phone=$("#phone").val();
-            livewith=$("#livewith").val();
-            married=$("#married").val();
-            disable=$("#disable").val();
-            disability=$("#disability").val();
-            insurance=$("#insurance").val();
-
-            }   
-        }
-
-        function getInfo(){
-            alert("here");
-            pageUrl="applicantsajax.php?cmd=4";
-            $.ajax(pageUrl,{async:true, complete:getPersonalComplete});
-            prompt('url',pageUrl);
-        }
-
     </script>
 </head>
-<body onload ="getInfo();">
+<body>
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -135,7 +92,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="personal.html">
                         <i class="pe-7s-user"></i>
                         <p>Personal</p>
@@ -165,7 +122,7 @@
                         <p>Extracurriculars</p>
                     </a>
                 </li>               
-                 <li>
+                 <li class="active">
                     <a href="schools.html">
                         <i class="pe-7s-study"></i>
                         <p>Schools</p>
@@ -275,7 +232,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
+                                <h4 class="title">Ashesi University</h4>
                             </div>
                             <div class="content">
                                 <form>
@@ -290,7 +247,7 @@
                                             <div class="form-group">
                                                 <label>Title</label>
                                 <div class="field">
-                                    <select id="title" name="title" onchange="showUser(this.value)">
+                                    <select id="title" name="title">
                                         <option value="default">Select</option>
                                         <option>Mr.</option>
                                         <option>Mrs.</option>

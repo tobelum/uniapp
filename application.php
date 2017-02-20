@@ -3,13 +3,10 @@
      
      /**
 	*Variables used in all the functions for Students
-	*@param string name
-	*@param enum open
-	*@param string username 
-	*@param string pword
-	*@param string street
-  *@param string town
-  *@param string region
+	*@param int applicantid
+	*@param int schoolid
+	*@param enum status
+	*@param date applydate
 	*/
 
 class application extends adb{
@@ -27,7 +24,7 @@ class application extends adb{
      }
 
      function getMySchools($applicantid='none'){
-        $strQuery="select school.name,school.schoolid from school,application where application.applicantid = '$applicantid' && application.schoolid=school.schoolid";
+        $strQuery="select school.name,school.schoolid,application.status,school.username from school,application where application.applicantid = '$applicantid' && application.schoolid=school.schoolid";
         return $this->query($strQuery);
      }
 
