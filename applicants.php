@@ -54,6 +54,72 @@ class applicants extends adb{
         return $this->query($strQuery);
      }
 
+      function updateParent($firstname='none',$lastname='none',$alive='none',$relationship='none',$education='none',$phone='none',$email='none',$employer='none',
+      $job='none',$applicantid='none'){
+        $strQuery="update parent SET firstname='$firstname',lastname='$lastname',relationship='$relationship',education='$education',phone='$phone',email='$email',employer='$employer',job='$job' where applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newParent($firstname='none',$lastname='none',$alive='none',$relationship='none',$education='none',$phone='none',$email='none',$employer='none',
+      $job='none',$applicantid='none'){
+        $strQuery="insert into parent SET firstname='$firstname',lastname='$lastname',relationship='$relationship',education='$education',phone='$phone',email='$email',employer='$employer',job='$job',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+     function getParent($applicantid='none'){
+        $strQuery="select * from parent where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+     function getId($applicantid='none'){
+        $strQuery="select $applicantid from parent where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newActivity($name='none',$startmonth='none',$startyear='none',$endmonth='none',$endyear='none',$positions='none',$applicantid='none'){
+        $strQuery="insert into activity SET name='$name',startmonth='$startmonth',startyear='$startyear',endmonth='$endmonth',endyear='$endyear',positions='$positions',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getActivity($applicantid='none'){
+        $strQuery="select * from activity where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function updateActivity($name='none',$startmonth='none',$startyear='none',$endmonth='none',$endyear='none',$positions='none',$applicantid='none'){
+        $strQuery="update activity SET name='$name',startmonth='$startmonth',startyear='$startyear',endmonth='$endmonth',endyear='$endyear',positions='$positions' where applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newHighSchool($name='none',$town='none',$region='none',$country='none',$startyear='none',$endyear='none',$certificate='none',$language='none',$applicantid='none'){
+        $strQuery="insert into highschool SET name='$name',town='$town',region='$region',country='$country',startyear='$startyear',endyear='$endyear',certificate='$certificate',language='$language',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getHighSchool($applicantid='none'){
+        $strQuery="select * from highschool where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function updateHighSchool($name='none',$town='none',$region='none',$country='none',$startyear='none',$endyear='none',$certificate='none',$language='none',$applicantid='none'){
+        $strQuery="update highschool SET name='$name',town='$town',region='$region',country='$country',startyear='$startyear',endyear='$endyear',certificate='$certificate',language='$language' where applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newBasicSchool($name='none',$town='none',$region='none',$country='none',$startyear='none',$endyear='none',$applicantid='none'){
+        $strQuery="insert into basicschool SET name='$name',town='$town',region='$region',country='$country',startyear='$startyear',endyear='$endyear',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getBasicSchool($applicantid='none'){
+        $strQuery="select * from basicschool where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function updateBasicSchool($name='none',$town='none',$region='none',$country='none',$startyear='none',$endyear='none',$applicantid='none'){
+        $strQuery="update basicschool SET name='$name',town='$town',region='$region',country='$country',startyear='$startyear',endyear='$endyear' where applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
 
    }
 

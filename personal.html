@@ -32,17 +32,20 @@
 
     <script>
 
-        function savePersonalComplete(){
+        function savePersonalComplete(xhr, status){
+            alert("here");
             if(status!="success"){
                 alert("status is "+status);
                 return;
             }
+            alert("there");
             var obj = $.parseJSON(xhr.responseText);
+            alert("see");
             if(obj.result==0){
                 alert("server response: "+obj.message);
             }else{
                 alert("Profile has been saved.");
-                // window.location="personal.html";
+                window.location="family.html";
             }
         }
 
@@ -69,14 +72,14 @@
 
             pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance;
             $.ajax(pageUrl,{async:true,complete:savePersonalComplete});
-            pageUrl = "localhost/uniapp/applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance;
             prompt('url',pageUrl);
+            
 
         }
 
-        function getPersonalComplete(){
+        function getPersonalComplete(xhr, status){
              if(status!="success"){
-                    alert("status is "+status);
+                    alert(status);
                     alert("Personal information could not be displayed");
                     return;
                 }
@@ -85,41 +88,42 @@
             if(obj.result==0){
                 alert("server response: "+obj.message);
             }else{
+                // alert("applicantid: "+obj.row[0].applicantid);
 
-            $("#applicantid").val() = obj.row['applicantid'];
-            $("#title").val() = obj.row['title'];
-            $("#email").val() = obj.row['email'];
-            firstname=$("#firstname").val();
-            lastname=$("#lastname").val();
-            gender=$("#gender").val();
-            nationality=$("#nationality").val();
-            passport=$("#passport").val();
-            expirydate=$("#expirydate").val();
-            street=$("#street").val();
-            town=$("#town").val();
-            region=$("#region").val();
-            country=$("#country").val();
-            birthdate=$("#birthdate").val();
-            phone=$("#phone").val();
-            livewith=$("#livewith").val();
-            married=$("#married").val();
-            disable=$("#disable").val();
-            disability=$("#disability").val();
-            insurance=$("#insurance").val();
+            $("#applicantid").val(obj.row[0].applicantid);
+            $("#title").val(obj.row[0].title);
+            $("#email").val(obj.row[0].email);
+            $("#firstname").val(obj.row[0].firstname);
+            $("#lastname").val(obj.row[0].lastname);
+            $("#gender").val(obj.row[0].gender);
+            $("#nationality").val(obj.row[0].nationality);
+            $("#passport").val(obj.row[0].passport);
+            $("#expirydate").val(obj.row[0].expirydate);
+            $("#street").val(obj.row[0].street);
+            $("#town").val(obj.row[0].town);
+            $("#region").val(obj.row[0].region);
+            $("#country").val(obj.row[0].country);
+            $("#birthdate").val(obj.row[0].birthdate);
+            $("#phone").val(obj.row[0].phone);
+            $("#livewith").val(obj.row[0].livewith);
+            $("#married").val(obj.row[0].married);
+            $("#disable").val(obj.row[0].disable);
+            $("#disability").val(obj.row[0].disability);
+            $("#insurance").val(obj.row[0].insurance);
 
             }   
         }
 
         function getInfo(){
-            alert("here");
+            // alert("here");
             pageUrl="applicantsajax.php?cmd=4";
             $.ajax(pageUrl,{async:true, complete:getPersonalComplete});
-            prompt('url',pageUrl);
+            // prompt('url',pageUrl);
         }
 
     </script>
 </head>
-<body onload ="getInfo();">
+<body onload ="getInfo()">
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -283,7 +287,7 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Applicant ID</label>
-                                                <input type="text" class="form-control" disabled value="12345" id="applicantid">
+                                                <input type="text" class="form-control" disabled id="applicantid">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -462,7 +466,7 @@
                                     </div>
 
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="savePersonal()">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="savePersonal()">Save and Continue</button>
                                     <div class="clearfix"></div>
                                 </form>
 

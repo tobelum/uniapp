@@ -19,8 +19,8 @@ class school extends adb{
 
      }
 
-     function getSchools(){
-          $strQuery="select * from school ";
+     function getSchools($applicantid){
+          $strQuery="select * from school where schoolid not in( select schoolid from application where applicantid = '$applicantid')";
           
           return $this->query($strQuery);
      }

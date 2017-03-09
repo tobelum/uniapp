@@ -38,7 +38,7 @@
                     return;
                 }
                 // alert("hey");
-                // alert(xhr.responseText);
+                //alert(xhr.responseText);
                 // alert("there");
 
                 window.location="personal.html";
@@ -55,7 +55,7 @@
 
                 $.ajax(pageUrl,{async:true,complete:addUserComplete});
                 alert("Thank you for registering, you can now sign in using your details.");
-                // prompt('url',pageUrl);
+                //prompt('url',pageUrl);
            }
 
            function logUserComplete(xhr,status){
@@ -64,13 +64,13 @@
                 //spanSignup.innerHTML="Sign Up Unsuccessful";
                 return;
                 }
-                alert("hello:"+xhr.responseText);
+                // alert("hello:"+xhr.responseText);
                 console.log(xhr.responseText);
                 var obj= $.parseJSON(xhr.responseText);
                 
-                alert("object is "+obj);
+                // alert("object is "+obj);
                 
-                alert("hey");
+                // alert("hey");
                 if(obj.result==0){
 
                     alert("server response: "+obj.message);
@@ -91,7 +91,7 @@
                 pageUrl="applicantsajax.php?cmd=2&email="+email+"&pword="+pword;
                 $.ajax(pageUrl,{async:true,complete:logUserComplete});
                 alert("Thank you for returning, please wait a moment while we retrieve your information.");
-                prompt('url',pageUrl);
+                // prompt('url',pageUrl);
            } 
         </script>
 

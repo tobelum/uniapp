@@ -169,7 +169,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="logout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -182,37 +182,43 @@
 
         <div class="content">
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Parent 1</h4>
+                                <h4 class="title">University</h4>
+                                <p>Are you currently studying in a university?</p> <button class="btn btn-info btn-fill">Yes</button> <button class="btn btn-info btn-fill">No</button>
+                                <p>Kindly fill in your current university details.</p>
                             </div>
                             <div class="content">
                                 <form>
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name of School</label>
+                                                <input type="text" class="form-control" placeholder="Name of School" id="name">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="First Name" id="firstname">
+                                                <label>Town</label>
+                                                <input type="text" class="form-control" placeholder="Town" id="town">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" id="lastname">
+                                                <label>Region</label>
+                                                <input type="text" class="form-control" placeholder="Region" id="region">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Is he/she alive?</label>
-                                                     <div class="field">
-                                                        <select id="alive" name="alive">
-                                                            <option value="default">Select</option>
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                        </select>
-                                                    </div>
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" placeholder="Country" id="country">
                                             </div>
                                         </div>
 
@@ -221,54 +227,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Relationship</label>
-                                                <input type="text" class="form-control" placeholder="Relationship" id="relationship">
+                                                <label>Start Date</label>
+                                                <input type="date" class="form-control" id="startdate">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Level of education</label>
-                                                     <div class="field">
-                                                        <select id="education" name="education">
-                                                            <option value="default">Select</option>
-                                                            <option>None</option>
-                                                            <option>Basic School</option>
-                                                            <option>High School</option>
-                                                            <option>Undergraduate</option>
-                                                            <option>Masters</option>
-                                                            <option>Doctorate</option>
-                                                        </select>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <input type="number" class="form-control" placeholder="Phone" id="phone">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" class="form-control" placeholder="Email" id="email">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Employer</label>
-                                                <input type="text" class="form-control" placeholder="Employer" id="employer">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Occupation</label>
-                                                <input type="text" class="form-control" placeholder="Occupation" id="job">
+                                                <label>Major</label>
+                                                <input type="text" class="form-control" id="major">
                                             </div>
                                         </div>
                                     </div>
@@ -285,33 +251,37 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Parent 2</h4>
+                                <h4 class="title">High School</h4>
+                                <p>Kindly fill in your most recent High school education.</p>
                             </div>
                             <div class="content">
                                 <form>
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name of School</label>
+                                                <input type="text" class="form-control" placeholder="Name of School" id="name">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="First Name" id="firstname">
+                                                <label>Town</label>
+                                                <input type="text" class="form-control" placeholder="Town" id="town">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" id="lastname">
+                                                <label>Region</label>
+                                                <input type="text" class="form-control" placeholder="Region" id="region">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Is he/she alive?</label>
-                                                     <div class="field">
-                                                        <select id="alive" name="alive">
-                                                            <option value="default">Select</option>
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                        </select>
-                                                    </div>
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" placeholder="Country" id="country">
                                             </div>
                                         </div>
 
@@ -320,24 +290,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Relationship</label>
-                                                <input type="text" class="form-control" placeholder="Relationship" id="relationship">
+                                                <label>Start year</label>
+                                                <input type="year" class="form-control" id="startyear">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Level of education</label>
-                                                     <div class="field">
-                                                        <select id="education" name="education">
-                                                            <option value="default">Select</option>
-                                                            <option>None</option>
-                                                            <option>Basic School</option>
-                                                            <option>High School</option>
-                                                            <option>Undergraduate</option>
-                                                            <option>Masters</option>
-                                                            <option>Doctorate</option>
-                                                        </select>
-                                                    </div>
+                                                <label>End year</label>
+                                                <input type="year" class="form-control" id="endyear">
                                             </div>
                                         </div>
                                     </div>
@@ -345,29 +305,77 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Phone</label>
-                                                <input type="number" class="form-control" placeholder="Phone" id="phone">
+                                                <label>Certificate obtained</label>
+                                                <input type="text" class="form-control" placeholder="Senior High School Certificate" id="certificate">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" class="form-control" placeholder="Email" id="email">
+                                                <label>Official language taught in class</label>
+                                                <input type="text" class="form-control" id="language">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <button type="submit" class="btn btn-info btn-fill pull-right">Save</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Basic School</h4>
+                                <p>Kindly fill in your most recent Basic school education.</p>
+                            </div>
+                            <div class="content">
+                                <form>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Employer</label>
-                                                <input type="text" class="form-control" placeholder="Employer" id="employer">
+                                                <label>Name of School</label>
+                                                <input type="text" class="form-control" placeholder="Name of School" id="name">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Town</label>
+                                                <input type="text" class="form-control" placeholder="Town" id="town">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Occupation</label>
-                                                <input type="text" class="form-control" placeholder="Occupation" id="job">
+                                                <label>Region</label>
+                                                <input type="text" class="form-control" placeholder="Region" id="region">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" placeholder="Country" id="country">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start year</label>
+                                                <input type="year" class="form-control" id="startyear">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>End year</label>
+                                                <input type="year" class="form-control" id="endyear">
                                             </div>
                                         </div>
                                     </div>

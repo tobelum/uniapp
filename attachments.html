@@ -33,7 +33,7 @@
     <script type="text/javascript">
         function fillForm(){
             exam=$("#exam").val();
-            alert(exam);
+            //alert(exam);
 
             window.location=exam+".html";
         }
@@ -179,7 +179,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="logout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -249,7 +249,7 @@
                                 <h4 class="title">Exam Results</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -269,9 +269,9 @@
 
                                     </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="fillForm()">Fill Form</button>
+                                    <button class="btn btn-info btn-fill pull-right" onclick="fillForm()">Fill Form</button>
                                     <div class="clearfix"></div>
-                                </form>
+                                
                             </div>
                         </div>
                     </div>

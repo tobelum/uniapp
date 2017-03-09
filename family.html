@@ -29,8 +29,75 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        function saveParentComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            var obj = $.parseJSON(xhr.responseText);
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Profile has been saved.");
+                // window.location="family.html";
+            }
+        }
+
+        function saveParent(){
+            firstname=$("#firstname").val();
+            lastname=$("#lastname").val();
+            alive=$("#alive").val();
+            relationship=$("#relationship").val();
+            education=$("#education").val();
+            phone=$("#phone").val();
+            email=$("#email").val();
+            employer=$("#employer").val();
+            job=$("#job").val();
+
+            pageUrl="applicantsajax.php?cmd=5&firstname="+firstname+"&lastname="+lastname+"&alive="+alive+"&relationship="+relationship+"&education="+education+"&phone="+phone+"&email="+email+"&employer="+employer+"&job="+job;
+            $.ajax(pageUrl,{async:true,complete:saveParentComplete});
+            prompt('url',pageUrl);
+        }
+
+        function getParentComplete(xhr, status){
+             if(status!="success"){
+                    alert(status);
+                    alert("Parent information could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                // alert("applicantid: "+obj.row[0].applicantid);
+
+            $("#firstname").val(obj.row[0].firstname);
+            $("#lastname").val(obj.row[0].lastname);
+            $("#alive").val(obj.row[0].alive);
+            $("#relationship").val(obj.row[0].relationship);
+            $("#education").val(obj.row[0].education);
+            $("#phone").val(obj.row[0].phone);
+            $("#email").val(obj.row[0].email);
+            $("#employer").val(obj.row[0].employer);
+            $("#job").val(obj.row[0].job);
+
+            }   
+        }
+
+        function getParent(){
+            alert("here");
+            pageUrl="applicantsajax.php?cmd=6";
+            $.ajax(pageUrl,{async:true, complete:getParentComplete});
+            prompt('url',pageUrl);
+        }
+    </script>
+
 </head>
-<body>
+<body onload="getParent()">
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -169,7 +236,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="logout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -273,7 +340,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="saveParent()">Save</button>
                                     <div class="clearfix"></div>
                                     
                                 </form>
