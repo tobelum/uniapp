@@ -24,35 +24,27 @@
 		break;
 
 		case 5:
-		saveParent();
+		newHighSchool();
 		break;
 
 		case 6:
-		getParent();
+		updateHighSchool();
 		break;
 
 		case 7;
-		saveActivity();
-		break;
-
-		case 8;
-		getActivity();
-		break;
-
-		case 9;
-		saveHighSchool();
-		break;
-
-		case 10;
 		getHighSchool();
 		break;
 
-		case 11;
-		saveBasicSchool();
+		case 8;
+		newUniversity();
 		break;
 
-		case 12;
-		getBasicSchool();
+		case 9;
+		updateUniversity();
+		break;
+
+		case 10;
+		getUniversity();
 		break;
 
 		default:
@@ -138,11 +130,22 @@ function fillPersonal(){
 	$disable = $_REQUEST['disable'];
 	$disability = $_REQUEST['disability'];
 	$insurance = $_REQUEST['insurance'];
+	$parentname = $_REQUEST['parentname'];
+	$alive = $_REQUEST['alive'];
+	$parentphone = $_REQUEST['parentphone'];
+	$parentemail = $_REQUEST['parentemail'];
+	$relationship = $_REQUEST['relationship'];
+	$parentjob = $_REQUEST['parentjob'];
 
 	$applicantid = $_SESSION['applicantid'];
 
 		$obj = new applicants();
-		$result=$obj->updatePersonal($applicantid,$title,$email,$firstname,$lastname,$gender,$nationality,$passport,$expirydate,$street,$town,$region,$country,$birthdate,$phone,$livewith,$married,$disable,$disability,$insurance);
+		$result=$obj->updatePersonal($applicantid,$title,$email,
+			$firstname,$lastname,$gender,$nationality,$passport,
+			$expirydate,$street,$town,$region,$country,$birthdate,
+			$phone,$livewith,$married,$disable,$disability,$insurance,
+			$parentname,$alive,$parentphone,$parentemail,$relationship,
+			$parentjob);
 			
 			var_dump($result);
 
@@ -181,66 +184,6 @@ function getPersonal() {
 	
 }
 
-// function saveParent(){
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$firstname = $_REQUEST['firstname'];
-// 	$lastname = $_REQUEST['lastname'];
-// 	$alive = $_REQUEST['alive'];
-// 	$relationship = $_REQUEST['relationship'];
-// 	$education = $_REQUEST['education'];
-// 	$phone = $_REQUEST['phone'];
-// 	$email = $_REQUEST['email'];
-// 	$employer = $_REQUEST['employer'];
-// 	$job = $_REQUEST['job'];
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 		$obj = new applicants();
-// 		$result=$obj->updateParent($firstname,$lastname,$alive,$relationship,$education,$phone,$email,$employer,$job,$applicantid);
-			
-// 			var_dump($result);
-
-// 			if (!$result) {
-// 				$res=$obj->newParent($firstname,$lastname,$alive,$relationship,$education,$phone,$email,$employer,$job,$applicantid);
-// 				var_dump($res);
-// 				if (!$res) {
-// 					echo '{"result":0 ,"message": "Parent failed to create."}';
-// 				}else{
-// 					echo '{"result":1, "message": "Parent created."}';
-// 				}
-// 				echo '{"result":0 ,"message": "Parent failed to update."}';
-// 			}else{
-// 	 			echo '{"result":1, "message": "Parent updated."}';
-// 			}
-	
-// }
-
-// function getParent() {
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 	$result = $obj->getParent($applicantid);
-
-// 	if (!$result) {
-// 		echo '{"result":0 ,"message": "Could not display Parent information"}';
-// 	}
-// 	else {
-// 		$row=$obj->fetch();
-// 		echo '{"result":1,"row":[';
-// 		while($row){
-// 			echo json_encode($row);
-
-// 			$row=$obj->fetch();
-// 			if($row!=false){
-// 				echo ",";
-// 			}
-// 		}
-// 		echo "]}";	
-// 	}
 	
 // }
 
@@ -304,67 +247,159 @@ function getPersonal() {
 	
 // }
 
-// function saveHighSchool(){
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
+function newHighSchool(){
+	include_once("applicants.php");
+	$obj = new applicants();
 
-// 	$name = $_REQUEST['name'];
-// 	$town = $_REQUEST['town'];
-// 	$region = $_REQUEST['region'];
-// 	$country = $_REQUEST['country'];
-// 	$startyear = $_REQUEST['startyear'];
-// 	$endyear = $_REQUEST['endyear'];
-// 	$certificate = $_REQUEST['certificate'];
-// 	$language = $_REQUEST['language'];
+	$name = $_REQUEST['name'];
+	$address = $_REQUEST['address'];
+	$startyear = $_REQUEST['startyear'];
+	$endyear = $_REQUEST['endyear'];
+	$certificate = $_REQUEST['certificate'];
+	$language = $_REQUEST['language'];
 
-// 	$applicantid = $_SESSION['applicantid'];
+	$applicantid = $_SESSION['applicantid'];
 
-// 		$obj = new applicants();
-// 		$result=$obj->updateHighSchool($name,$town,$region,$country,$startyear,$endyear,$certificate,$language,$applicantid);
+		$obj = new applicants();
+		$result=$obj->newHighSchool($name,$address,$startyear,$endyear,$certificate,$language,$applicantid);
 			
-// 			var_dump($result);
+			var_dump($result);
 
-// 			if (!$result) {
-// 				$res=$obj->newHighSchool($name,$town,$region,$country,$startyear,$endyear,$certificate,$language,$applicantid);
-// 				var_dump($res);
-// 				if (!$res) {
-// 					echo '{"result":0 ,"message": "HighSchool failed to create."}';
-// 				}else{
-// 					echo '{"result":1, "message": "HighSchool created."}';
-// 				}
-// 				echo '{"result":0 ,"message": "HighSchool failed to update."}';
-// 			}else{
-// 	 			echo '{"result":1, "message": "HighSchool updated."}';
-// 			}
+			if (!$result) {
+				echo '{"result":0 ,"message": "HighSchool failed to create."}';
+			}else{
+	 			echo '{"result":1, "message": "HighSchool added."}';
+			}
 	
-// }
+}
 
-// function getHighSchool() {
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
+function updateHighSchool(){
+	include_once("applicants.php");
+	$obj = new applicants();
 
-// 	$applicantid = $_SESSION['applicantid'];
+	$highschoolid = $_REQUEST['highschoolid'];
+	$name = $_REQUEST['name'];
+	$address = $_REQUEST['address'];
+	$startyear = $_REQUEST['startyear'];
+	$endyear = $_REQUEST['endyear'];
+	$certificate = $_REQUEST['certificate'];
+	$language = $_REQUEST['language'];
 
-// 	$result = $obj->getHighSchool($applicantid);
+	$applicantid = $_SESSION['applicantid'];
 
-// 	if (!$result) {
-// 		echo '{"result":0 ,"message": "Could not display BasicSchool"}';
-// 	}
-// 	else {
-// 		$row=$obj->fetch();
-// 		echo '{"result":1,"row":[';
-// 		while($row){
-// 			echo json_encode($row);
-
-// 			$row=$obj->fetch();
-// 			if($row!=false){
-// 				echo ",";
-// 			}
-// 		}
-// 		echo "]}";	
-// 	}
+		$obj = new applicants();
 	
-// }
+				$res=$obj->updateHighSchool($highschoolid,$name,$address,$startyear,$endyear,$certificate,$language);
+				var_dump($res);
+				if (!$res) {
+				echo '{"result":0 ,"message": "HighSchool failed to update."}';
+			}else{
+	 			echo '{"result":1, "message": "HighSchool updated."}';
+			}
+	
+}
+
+function getHighSchool() {
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$result = $obj->getHighSchool($applicantid);
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display HighSchool"}';
+	}
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
+	}
+	
+}
+
+
+function newUniversity(){
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$name = $_REQUEST['name'];
+	$address = $_REQUEST['address'];
+	$startdate = $_REQUEST['startdate'];
+	$major = $_REQUEST['major'];
+	$applicantid = $_SESSION['applicantid'];
+
+		$obj = new applicants();
+		$result=$obj->newHighSchool($name,$address,$startdate,$major,$applicantid);
+			
+			var_dump($result);
+
+			if (!$result) {
+				echo '{"result":0 ,"message": "University failed to create."}';
+			}else{
+	 			echo '{"result":1, "message": "University added."}';
+			}
+	
+}
+
+function updateUniversity(){
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$universityid = $_REQUEST['universityid'];
+	$name = $_REQUEST['name'];
+	$address = $_REQUEST['address'];
+	$startdate = $_REQUEST['startdate'];
+	$major = $_REQUEST['major'];
+	$applicantid = $_SESSION['applicantid'];
+
+		$obj = new applicants();
+	
+				$res=$obj->updateHighSchool($highschoolid,$name,$address,$startdate,$major);
+				var_dump($res);
+				if (!$res) {
+				echo '{"result":0 ,"message": "University failed to update."}';
+			}else{
+	 			echo '{"result":1, "message": "University updated."}';
+			}
+	
+}
+
+function getUniversity() {
+	include_once("applicants.php");
+	$obj = new applicants();
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$result = $obj->getUniversity($applicantid);
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display University"}';
+	}
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
+	}
+	
+}
+
 
 // function saveBasicSchool(){
 // 	include_once("applicants.php");

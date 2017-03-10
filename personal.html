@@ -69,8 +69,14 @@
             disable=$("#disable").val();
             disability=$("#disability").val();
             insurance=$("#insurance").val();
+            parentname=$("#parentname").val();
+            alive=$("#alive").val();
+            parentphone=$("#parentphone").val();
+            parentemail=$("#parentemail").val();
+            relationship=$("#relationship").val();
+            parentjob=$("#parentjob").val();
 
-            pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance;
+            pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance+"&parentname="+parentname+"&alive="+alive+"&parentphone="+parentphone+"&parentemail="+parentemail+"&relationship="+relationship+"&parentjob="+parentjob;
             $.ajax(pageUrl,{async:true,complete:savePersonalComplete});
             prompt('url',pageUrl);
             
@@ -110,7 +116,12 @@
             $("#disable").val(obj.row[0].disable);
             $("#disability").val(obj.row[0].disability);
             $("#insurance").val(obj.row[0].insurance);
-
+            $("#parentname").val(obj.row[0].parentname);
+            $("#alive").val(obj.row[0].alive);
+            $("#parentphone").val(obj.row[0].parentphone);
+            $("#parentemail").val(obj.row[0].parentemail);
+            $("#relationship").val(obj.row[0].relationship);
+            $("#parentjob").val(obj.row[0].parentjob);
             }   
         }
 
@@ -146,9 +157,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="family.html">
+                    <a href="sponsor.html">
                         <i class="pe-7s-users"></i>
-                        <p>Family</p>
+                        <p>Sponsor</p>
                     </a>
                 </li>
                  <li>
@@ -400,7 +411,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Phone</label>
-                                                <input type="number" class="form-control" placeholder="Phone" id="phone">
+                                                <input type="text" class="form-control" placeholder="Phone" id="phone">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -461,6 +472,57 @@
                                         <option>No</option>
                                     </select>
                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label>Full Name of Parent/Guardian</label>
+                                                <input type="text" class="form-control" placeholder="Full Name" id="parentname">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Is Parent/Guardian alive?</label>
+                                                     <div class="field">
+                                                        <select id="alive" name="alive">
+                                                            <option value="default">Select</option>
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                        </select>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Parent/Guardian's Phone</label>
+                                                <input type="number" class="form-control" placeholder="Phone" id="parentphone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Parent/Guardian's Email</label>
+                                                <input type="text" class="form-control" placeholder="Email" id="parentemail">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Parent/Guardian's Relationship</label>
+                                                <input type="text" class="form-control" placeholder="Relationship" id="relationship">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Occupation of Parent/Guardian</label>
+                                                <input type="text" class="form-control" placeholder="Occupation" id="parentjob">
                                             </div>
                                         </div>
                                     </div>
