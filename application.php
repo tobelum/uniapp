@@ -35,6 +35,24 @@ class application extends adb{
         return $this->query($strQuery);
      }
 
+      function getCentral($applicantid){
+          $strQuery="select * from central where applicantid = '$applicantid'";
+          
+          return $this->query($strQuery);
+     }
+
+    function newCentral($applicantid='none',$code1='none',$code2='none',$type='none',$campus='none'){
+    
+          $strQuery = "insert into central SET applicantid = '$applicantid', code1 = '$code1', code2 = '$code2',type = '$type',campus='$campus'";
+          return $this->query ($strQuery);
+
+     }
+
+     function updateCentral($code1='none',$code2='none',$type='none',$campus='none',$applicantid='none'){
+        $strQuery="update central SET code1='$code1',code2='$code2',type='$type',campus='$campus' where applicantid='$applicantid'";
+        return $this->query($strQuery);
+     }
+
 
 
    }

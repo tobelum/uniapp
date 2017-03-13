@@ -47,6 +47,7 @@
 		getUniversity();
 		break;
 
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -338,7 +339,7 @@ function newUniversity(){
 	$applicantid = $_SESSION['applicantid'];
 
 		$obj = new applicants();
-		$result=$obj->newHighSchool($name,$address,$startdate,$major,$applicantid);
+		$result=$obj->newUniversity($name,$address,$startdate,$major,$applicantid);
 			
 			var_dump($result);
 
@@ -363,7 +364,7 @@ function updateUniversity(){
 
 		$obj = new applicants();
 	
-				$res=$obj->updateHighSchool($highschoolid,$name,$address,$startdate,$major);
+				$res=$obj->updateUniversity($highschoolid,$name,$address,$startdate,$major);
 				var_dump($res);
 				if (!$res) {
 				echo '{"result":0 ,"message": "University failed to update."}';
@@ -401,64 +402,5 @@ function getUniversity() {
 }
 
 
-// function saveBasicSchool(){
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$name = $_REQUEST['name'];
-// 	$town = $_REQUEST['town'];
-// 	$region = $_REQUEST['region'];
-// 	$country = $_REQUEST['country'];
-// 	$startyear = $_REQUEST['startyear'];
-// 	$endyear = $_REQUEST['endyear'];
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 		$obj = new applicants();
-// 		$result=$obj->updateBasicSchool($name,$town,$region,$country,$startyear,$endyear,$applicantid);
-			
-// 			var_dump($result);
-
-// 			if (!$result) {
-// 				$res=$obj->newBasicSchool($name,$town,$region,$country,$startyear,$endyear,$applicantid);
-// 				var_dump($res);
-// 				if (!$res) {
-// 					echo '{"result":0 ,"message": "BasicSchool failed to create."}';
-// 				}else{
-// 					echo '{"result":1, "message": "BasicSchool created."}';
-// 				}
-// 				echo '{"result":0 ,"message": "BasicSchool failed to update."}';
-// 			}else{
-// 	 			echo '{"result":1, "message": "BasicSchool updated."}';
-// 			}
-	
-// }
-
-// function getHighSchool() {
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 	$result = $obj->getBasicSchool($applicantid);
-
-// 	if (!$result) {
-// 		echo '{"result":0 ,"message": "Could not display BasicSchool"}';
-// 	}
-// 	else {
-// 		$row=$obj->fetch();
-// 		echo '{"result":1,"row":[';
-// 		while($row){
-// 			echo json_encode($row);
-
-// 			$row=$obj->fetch();
-// 			if($row!=false){
-// 				echo ",";
-// 			}
-// 		}
-// 		echo "]}";	
-// 	}
-	
-// }
 
 ?>

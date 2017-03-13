@@ -25,7 +25,6 @@ class school extends adb{
           return $this->query($strQuery);
      }
 
-
    }
 
 
