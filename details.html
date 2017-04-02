@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Personal - UniApp</title>
+	<title>Admin - Review Applicants</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -30,60 +30,10 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
-    <script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        function savePersonalComplete(xhr, status){
-            //alert("here");
-            if(status!="success"){
-                //alert("status is "+status);
-                return;
-            }
-            //alert(xhr.responseText);
-            var obj = $.parseJSON(xhr.responseText);
-            //alert("see");
-            //alert(obj);
-            if(obj.result==0){
-                alert("server response: "+obj.message);
-            }else{
-                alert("Profile has been saved.");
-                document.getElementById('menu-sponsor').click();
-            }
-        }
-
-        function savePersonal(){
-            title=$("#title").val();
-            email=$("#email").val();
-            firstname=$("#firstname").val();
-            lastname=$("#lastname").val();
-            gender=$("#gender").val();
-            nationality=$("#nationality").val();
-            passport=$("#passport").val();
-            expirydate=$("#expirydate").val();
-            street=$("#street").val();
-            town=$("#town").val();
-            region=$("#region").val();
-            country=$("#country").val();
-            birthdate=$("#birthdate").val();
-            phone=$("#phone").val();
-            livewith=$("#livewith").val();
-            married=$("#married").val();
-            disable=$("#disable").val();
-            disability=$("#disability").val();
-            insurance=$("#insurance").val();
-            parentname=$("#parentname").val();
-            alive=$("#alive").val();
-            parentphone=$("#parentphone").val();
-            parentemail=$("#parentemail").val();
-            relationship=$("#relationship").val();
-            parentjob=$("#parentjob").val();
-
-            pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance+"&parentname="+parentname+"&alive="+alive+"&parentphone="+parentphone+"&parentemail="+parentemail+"&relationship="+relationship+"&parentjob="+parentjob;
-            $.ajax(pageUrl,{async:true,complete:savePersonalComplete});
-            //prompt('url',pageUrl);
-            
-
-        }
-
+    <script type="text/javascript">
         function getPersonalComplete(xhr, status){
              if(status!="success"){
                     alert(status);
@@ -134,8 +84,9 @@
         }
 
     </script>
+
 </head>
-<body onload ="getInfo()">
+<body>
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -146,59 +97,35 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    UniApp
+                    Uniapp
                 </a>
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href="personal.html">
-                        <i class="pe-7s-user"></i>
-                        <p>Personal</p>
+                <li>
+                    <a href="dashboard.php">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="sponsor.html" id="menu-sponsor">
-                        <i class="pe-7s-users"></i>
-                        <p>Sponsor</p>
+                    <a href="profile.html">
+                        <i class="pe-7s-user"></i>
+                        <p>School Profile</p>
                     </a>
                 </li>
-                 <li>
-                    <a href="academic.html">
-                        <i class="pe-7s-notebook"></i>
-                        <p>Academic history</p>
+                <li class="active">
+                    <a href="list.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Review Applicants</p>
                     </a>
-                </li>               
-                 <li>
-                    <a href="attachments.html">
-                        <i class="pe-7s-paperclip"></i>
-                        <p>Attachments</p>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
                     </a>
-                </li> 
-                 <li>
-                    <a href="exams.html">
-                        <i class="pe-7s-medal"></i>
-                        <p>Examinations</p>
-                    </a>
-                </li>               
-                 <li>
-                    <a href="schools.html">
-                        <i class="pe-7s-study"></i>
-                        <p>Schools</p>
-                    </a>
-                </li> 
-                 <li>
-                    <a href="payment.html">
-                        <i class="pe-7s-cash"></i>
-                        <p>Payment</p>
-                    </a>
-                </li>               
-                 <li>
-                    <a href="explore.html">
-                        <i class="pe-7s-world"></i>
-                        <p>Explore</p>
-                    </a>
-                </li> 
+                </li>
             </ul>
     	</div>
     </div>
@@ -213,7 +140,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User</a>
+                    <a class="navbar-brand" href="#">Table List</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -274,7 +201,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="logout.php">
+                            <a href="adminlogout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -284,17 +211,32 @@
             </div>
         </nav>
 
-
         <div class="content">
+            <h2 class="title">Applicant's details</h2>
+               <p class="category">Click on the tabs to view the different sections of the application</p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#home">Personal</a></li>
+    <li><a href="#menu1">Sponsor</a></li>
+    <li><a href="#menu2">Academic history</a></li>
+    <li><a href="#menu3">Attachments</a></li>
+    <li><a href="#menu4">Examinations</a></li>
+    <li><a href="#menu5">Extras</a></li>
+    <li><a href="#menu6">Review</a></li>
+  </ul>
+  <div class="clear-fix"></div>
+  <div class="clearfix"></div>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
+                                <h4 class="title">Personal Information</h4>
                             </div>
                             <div class="content">
-                                <form>
+
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -528,19 +470,263 @@
                                         </div>
                                     </div>
 
+                            </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="savePersonal()">Save and Continue</button>
-                                    <div class="clearfix"></div>
-                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Sponsor</h4>
+                            </div>
+                            <div class="content">
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" placeholder="First Name" id="firstname">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name" id="lastname">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Is he/she alive?</label>
+                                                     <div class="field">
+                                                        <select id="alive" name="alive">
+                                                            <option value="default">Select</option>
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                        </select>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input type="number" class="form-control" placeholder="Phone" id="phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" placeholder="Email" id="email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Relationship</label>
+                                                <input type="text" class="form-control" placeholder="Relationship" id="relationship">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Occupation</label>
+                                                <input type="text" class="form-control" placeholder="Occupation" id="job">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    <div id="menu2" class="tab-pane fade">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">University</h4>
+                                <p class="category">Details of previous universities attended. </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Start date</th>
+                                        <th>Major</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="universities">
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">HighSchools</h4>
+                                <p class="category">Details of previous highschools attended.</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Start year</th>
+                                        <th>End Year</th>
+                                        <th>Certifcate</th>
+                                        <th>Language</th>
+                                        <th></th>                 
+                                    </thead>
+                                    <tbody id ="highschools">
+                                    </tbody>
+                                </table>
 
+                            </div>
+
+                <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Attachments</h3>
+      <p>Download the attachments to view.</p>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+             <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">WASSCE</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="wassce">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">SAT</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Critical Reading</th>
+                                        <th>Writing</th>
+                                        <th>Maths</th>
+                                        <th></th>                 
+                                    </thead>
+                                    <tbody id ="sat">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">IGSCE</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="igsce">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">TOEFL</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Writing</th>
+                                        <th>Reading</th>
+                                        <th>Listening</th>
+                                        <th>Speaking</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="toefl">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+    <div id="menu5" class="tab-pane fade">
+      <h3>Extras</h3>
+      <p>Extra requirements</p>
+    </div>
+    <div id="menu6" class="tab-pane fade">
+      <h3>Review</h3>
+      <p>To review the applicant, add a comment in the comment box and change the status of the application.</p>
+    </div>
+  </div>
+
+        </div>
 
         <footer class="footer">
             <div class="container-fluid">
@@ -564,7 +750,7 @@
                         <li>
                             <a href="#">
                                Blog
-                            </a>
+                            </a> 
                         </li>
                     </ul>
                 </nav>
@@ -574,9 +760,16 @@
             </div>
         </footer>
 
+
     </div>
 </div>
-
+<script>
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+});
+</script>
 
 </body>
 
@@ -601,5 +794,6 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+
 
 </html>

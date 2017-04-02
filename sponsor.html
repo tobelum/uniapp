@@ -59,7 +59,7 @@
 
             pageUrl="applicantsajax.php?cmd=5&firstname="+firstname+"&lastname="+lastname+"&alive="+alive+"&relationship="+relationship+"&education="+education+"&phone="+phone+"&email="+email+"&employer="+employer+"&job="+job;
             $.ajax(pageUrl,{async:true,complete:saveParentComplete});
-            prompt('url',pageUrl);
+            //prompt('url',pageUrl);
         }
 
         function getParentComplete(xhr, status){
@@ -89,10 +89,10 @@
         }
 
         function getParent(){
-            alert("here");
+            //alert("here");
             pageUrl="applicantsajax.php?cmd=6";
             $.ajax(pageUrl,{async:true, complete:getParentComplete});
-            prompt('url',pageUrl);
+           // prompt('url',pageUrl);
         }
     </script>
 
@@ -138,9 +138,9 @@
                     </a>
                 </li>
                  <li>
-                    <a href="extracurriculars.html">
+                    <a href="exams.html">
                         <i class="pe-7s-medal"></i>
-                        <p>Extracurriculars</p>
+                        <p>Examinations</p>
                     </a>
                 </li>               
                  <li>

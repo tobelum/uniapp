@@ -46,7 +46,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].status+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='pay(\""+obj.row[length-1].schoolid+"\")'>Pay</button></td><td><button type='submit' class='btn btn-info btn-fill pull-right' disabled onclick='submit(\""+obj.row[length-1].schoolid+"\")'>Submit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].status+"</td><td>"+obj.row[length-1].ghanafee+"</td><td>"+obj.row[length-1].foreignfee+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='pay(\""+obj.row[length-1].schoolid+"\")'>Pay</button></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='submit(\""+obj.row[length-1].schoolid+"\")'>Submit</button></td></tr>";
                     length-=1;
                 }
                 myschools.innerHTML=result;
@@ -57,6 +57,32 @@
     {
         pageUrl="applicationajax.php?cmd=2";
         $.ajax(pageUrl,{async:true, complete:getMySchoolsComplete});
+    }
+
+    function submitComplete(xhr, status){
+                if(status!="success"){
+                    alert("status is "+status);
+                    alert("Application could not be submitted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    // alert("Confirm submission of application.");
+                    window.location="payment.html";
+
+            }
+    }
+
+    function submit(schoolid){
+        pageUrl = "applicationajax.php?cmd=8&schoolid="+schoolid;
+        $.ajax(pageUrl,{async:true, complete:submitComplete});
     }
     </script>
 </head>
@@ -83,9 +109,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="family.html">
+                    <a href="sponsor.html">
                         <i class="pe-7s-users"></i>
-                        <p>Family</p>
+                        <p>sponsor</p>
                     </a>
                 </li>
                  <li>
@@ -101,9 +127,9 @@
                     </a>
                 </li>
                  <li>
-                    <a href="extracurriculars.html">
+                    <a href="exams.html">
                         <i class="pe-7s-medal"></i>
-                        <p>Extracurriculars</p>
+                        <p>Examinations</p>
                     </a>
                 </li>               
                  <li>
@@ -222,7 +248,9 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>Name</th>
-                                        <th>Status</th>                  
+                                        <th>Status</th>  
+                                        <th>Ghanaian</th>
+                                        <th>International</th>                
                                     </thead>
                                     <tbody id ="myschools">
                                         <!-- <tr>

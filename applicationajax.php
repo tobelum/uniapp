@@ -35,6 +35,10 @@
 		getCentral();
 		break;
 
+		case 8;
+		submit();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -226,6 +230,30 @@ function getCentral() {
 			}
 		}
 		echo "]}";	
+	}
+	
+}
+
+function submit() {
+	if (($_REQUEST['schoolid']=="")) {
+		echo '{"result":0, "message": "Schoolid was not given"}';
+		return;
+	}
+	
+	include_once("application.php");
+	$obj = new application();
+	$schoolid= $_REQUEST['schoolid'];
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$a = $obj->submit($applicantid,$schoolid);
+
+	if (!$a) {
+		echo '{"result":0 ,"message": "Could not submit application"}';
+	}
+	
+	else {
+	 echo '{"result": 1, "message": "Application submitted"}';	
 	}
 	
 }

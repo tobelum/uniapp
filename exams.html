@@ -36,10 +36,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-            function getHighschoolComplete(xhr, status){
+
+
+    function getWassceComplete(xhr, status){
              if(status!="success"){
                     alert("status is "+status);
-                    alert("Schools could not be displayed");
+                    alert("Scores could not be displayed");
                     return;
                 }
                 
@@ -51,103 +53,42 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startyear+"</td><td>"+obj.row[length-1].endyear+"</td><td>"+obj.row[length-1].certificate+"</td><td>"+obj.row[length-1].language+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='updateHighschool("+obj.row[length-1].highschoolid+")'>Edit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].subject+"</td><td>"+obj.row[length-1].grade+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='#'>Edit</button></td></tr>";
                     length-=1;
                 }
-                highschools.innerHTML=result;
+                wassce.innerHTML=result;
             }      
     }
 
-    function getHighschool()
+    function getWassce()
     {
-        pageUrl="applicantsajax.php?cmd=7";
-        $.ajax(pageUrl,{async:true, complete:getHighschoolComplete});
+        pageUrl="applicantsajax.php?cmd=12";
+        $.ajax(pageUrl,{async:true, complete:getWassceComplete});
+       // prompt('url',pageUrl);
     }
 
-    function getUniversityComplete(xhr, status){
-             if(status!="success"){
-                    alert("status is "+status);
-                    alert("Schools could not be displayed");
-                    return;
-                }
-                
-            var obj= $.parseJSON(xhr.responseText); 
-            if(obj.result==0){
-                alert("server response: "+obj.message);
-            }else{
-                var result="";
-                var length = obj.row.length;
 
-                while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startdate+"</td><td>"+obj.row[length-1].major+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='updateUniversity("+obj.row[length-1].universityid+")'>Edit</button></td></tr>";
-                    length-=1;
-                }
-                universities.innerHTML=result;
-            }      
-    }
-
-    function getUniversity()
-    {
-        pageUrl="applicantsajax.php?cmd=10";
-        $.ajax(pageUrl,{async:true, complete:getUniversityComplete});
-    }
-
-    function addHighschoolComplete(xhr, status){
-            alert("here");
+    function addWassceComplete(xhr, status){
             if(status!="success"){
                 alert("status is "+status);
                 return;
             }
-            alert("there");
             var obj = $.parseJSON(xhr.responseText);
-            alert("see");
+           
             if(obj.result==0){
                 alert("server response: "+obj.message);
             }else{
-                alert("School has been added.");
+                alert("Score has been added.");
             }
         }
 
-    function addHighschool(){
-            name=$("#highschname").val();
-            address=$("#highschaddress").val();
-            startyear=$("#startyear").val();
-            endyear=$("#endyear").val();
-            certificate=$("#certificate").val();
-            language=$("#language").val();
+    function addwassce(){
+            subject=$("#subject").val();
+            grade=$("#grade").val();
 
-            pageUrl="applicantsajax.php?cmd=5&name="+name+"&address="+address+"&startyear="+startyear+"&endyear="+endyear+"&certificate="+certificate+"&language="+language;
-            $.ajax(pageUrl,{async:true,complete:addHighschoolComplete});
-            prompt('url',pageUrl);
-            
-
-        }
-
-    function addUniversityComplete(xhr, status){
-            alert("here");
-            if(status!="success"){
-                alert("status is "+status);
-                return;
-            }
-            alert("there");
-            var obj = $.parseJSON(xhr.responseText);
-            alert("see");
-            if(obj.result==0){
-                alert("server response: "+obj.message);
-            }else{
-                alert("School has been added.");
-            }
-        }
-
-    function addUniversity(){
-            name=$("#universityname").val();
-            address=$("#universityaddress").val();
-            startdate=$("#startdate").val();
-            major=$("#major").val();
-
-            pageUrl="applicantsajax.php?cmd=8&name="+name+"&address="+address+"&startdate="+startdate+"&major="+major;
-            $.ajax(pageUrl,{async:true,complete:addUniversityComplete});
-            prompt('url',pageUrl);
+            pageUrl="applicantsajax.php?cmd=11&subject="+subject+"&grade="+grade;
+            $.ajax(pageUrl,{async:true,complete:addWassceComplete});
+           //prompt('url',pageUrl);
             
 
         }
@@ -155,7 +96,7 @@
 
 
 </head>
-<body onload="getHighschool(); getUniversity()">
+<body onload="getWassce();">
 
 
 <div class="wrapper">
@@ -184,7 +125,7 @@
                         <p>Sponsor</p>
                     </a>
                 </li>
-                 <li class="active">
+                 <li>
                     <a href="academic.html">
                         <i class="pe-7s-notebook"></i>
                         <p>Academic history</p>
@@ -196,7 +137,7 @@
                         <p>Attachments</p>
                     </a>
                 </li>
-                 <li>
+                 <li class="active">
                     <a href="exams.html">
                         <i class="pe-7s-medal"></i>
                         <p>Examinations</p>
@@ -313,28 +254,26 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">University</h4>
-                                <p class="category">If you are currently studying, fill in the details of your university. </p>
+                                <h4 class="title">WASSCE</h4>
+                                <p class="category">Fill in the details of your WASSCE grades. </p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Start date</th>
-                                        <th>Major</th>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
                                         <th></th>
                                     </thead>
-                                    <tbody id="universities">
+                                    <tbody id="wassce">
                                     </tbody>
                                 </table>
 
                             </div>
-                             <!-- Add University School modal -->
-<div class="row" id="modals">
+                             <!-- Add wassce modal -->
+                <div class="row" id="modals">
                     <div class="col-md-6">
-                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#universityModal">Add</button>
+                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#wassceModal">Add</button>
                         
                     </div>
 
@@ -342,33 +281,31 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">HighSchools</h4>
-                                <p class="category">Fill in the details about your recent HighSchools</p>
+                                <h4 class="title">SAT</h4>
+                                <p class="category">Fill in the details of your SAT grades</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Start year</th>
-                                        <th>End Year</th>
-                                        <th>Certifcate</th>
-                                        <th>Language</th>
+                                        <th>Critical Reading</th>
+                                        <th>Writing</th>
+                                        <th>Maths</th>
                                         <th></th>                 
                                     </thead>
-                                    <tbody id ="highschools">
+                                    <tbody id ="sat">
                                     </tbody>
                                 </table>
 
                             </div>
-                            <!-- Add High School modal -->
-<div class="row" id="modals">
+                            <!-- Add sat modal -->
+                <div class="row" id="modals">
                     <div class="col-md-6">
-                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#highschoolModal">Add</button>
+                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#satModal">Add</button>
                         
                     </div>
 
@@ -377,6 +314,107 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">IGSCE</h4>
+                                <p class="category">Fill in the details of your IGSCE grades. </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="igsce">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                             <!-- Add IGSCE modal -->
+                <div class="row" id="modals">
+                    <div class="col-md-6">
+                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#igsceModal">Add</button>
+                        
+                    </div>
+
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">OTHER</h4>
+                                <p class="category">Fill in the details of other exam you wish to apply with. </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="other">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                             <!-- Add Other modal -->
+                <div class="row" id="modals">
+                    <div class="col-md-6">
+                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#otherModal">Add</button>
+                        
+                    </div>
+
+                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">TOEFL</h4>
+                                <p class="category">Fill in the details of your TOEFL grades. </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Writing</th>
+                                        <th>Reading</th>
+                                        <th>Listening</th>
+                                        <th>Speaking</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody id="toefl">
+                                    </tbody>
+                                </table>
+
+                            </div>
+                             <!-- Add TOEFL modal -->
+                <div class="row" id="modals">
+                    <div class="col-md-6">
+                        <button class="btn btn-info btn-fill pull-left" data-toggle="modal" data-target="#toeflModal">Add</button>
+                        
+                    </div>
+
+                </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -416,67 +454,112 @@
     </div>
 </div>
 
-<!-- Sart Modal -->
-<div class="modal fade" id="universityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Sart WASSCE Modal -->
+<div class="modal fade" id="wassceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="material-icons">clear</i>
+                    <i class="material-icons">close</i>
                 </button>
-                <h4 class="modal-title">Add University details</h4>
+                <h4 class="modal-title">Add WASSCE Subject and grade</h4>
             </div>
             <div class="modal-body">
-
-                            <div class="header">
-                                <h4 class="title">University</h4>
-                                <p>Kindly fill in your current University education.</p>
-                            </div>
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <label>Name of University</label>
-                                                <input type="text" class="form-control" placeholder="Name of School" id="universityname">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Address" id="universityaddress">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Start date</label>
-                                                <input type="date" class="form-control" id="startdate">
+                                                <label>Subject</label>
+                                                <input type="text" class="form-control" placeholder="Mathematics" id="subject">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Major</label>
-                                                <input type="text" class="form-control" id="major">
+                                                <label>Grade</label>
+                                                <input type="text" class="form-control" placeholder="A1" id="grade">
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addUniversity()">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addwassce()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                
             </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-default btn-simple">Nice Button</button> -->
-                <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+<!--  End Modal -->
+
+<!-- Sart Modal -->
+<div class="modal fade" id="igsceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+                <h4 class="modal-title">Add IGSCE Subject and grade</h4>
+            </div>
+            <div class="modal-body">
+                            <div class="content">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <input type="text" class="form-control" placeholder="Mathematics" id="subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <input type="text" class="form-control" placeholder="A1" id="grade">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addigsce()">Save</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  End Modal -->
+
+<!-- Sart Modal -->
+<div class="modal fade" id="otherModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+                <h4 class="modal-title">Add Subject and grade</h4>
+            </div>
+            <div class="modal-body">
+                            <div class="content">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <input type="text" class="form-control" placeholder="Mathematics" id="subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <input type="text" class="form-control" placeholder="A1" id="grade">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addother()">Save</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
             </div>
         </div>
     </div>
@@ -485,81 +568,96 @@
 
 
 <!-- Sart Modal -->
-<div class="modal fade" id="highschoolModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="satModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="material-icons">clear</i>
+                    <i class="material-icons">close</i>
                 </button>
-                <h4 class="modal-title">Add HighSchool details</h4>
+                <h4 class="modal-title">Add SAT scores for the corresponding subject</h4>
             </div>
             <div class="modal-body">
-
-                            <div class="header">
-                                <h4 class="title">High School</h4>
-                                <p>Kindly fill in your most recent High school education.</p>
-                            </div>
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Name of School</label>
-                                                <input type="text" class="form-control" placeholder="Name of School" id="highschname">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Critical reading" id="reading">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Writing" id="writing">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Maths" id="maths">
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Address" id="highschaddress">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Start year</label>
-                                                <input type="year" class="form-control" id="startyear">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>End year</label>
-                                                <input type="year" class="form-control" id="endyear">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Certificate obtained</label>
-                                                <input type="text" class="form-control" placeholder="Senior High School Certificate" id="certificate">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Official language taught in class</label>
-                                                <input type="text" class="form-control" id="language">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addHighschool()">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addsat()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                
             </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-default btn-simple">Nice Button</button> -->
-                <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+</div>
+<!--  End Modal -->
+
+<!-- Sart Modal -->
+<div class="modal fade" id="toeflModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+                <h4 class="modal-title">Add TOEFL scores for the corresponding subjects</h4>
+            </div>
+            <div class="modal-body">
+                            <div class="content">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Writing" id="writing">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Reading" id="reading">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Listening" id="listening">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Score</label>
+                                                <input type="text" class="form-control" placeholder="Speaking" id="speaking">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addsat()">Save</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
             </div>
         </div>
     </div>

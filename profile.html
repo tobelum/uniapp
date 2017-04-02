@@ -1,3 +1,4 @@
+<?php include_once("schools.php"); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>Admin - Dashboard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,63 +30,109 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        function saveProfileComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            
+            var obj = $.parseJSON(xhr.responseText);
+            //alert("see");
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Profile has been saved.");
+            }
+        }
+
+        function saveProfile(){
+            name=$("#name").val();
+            open=$("#open").val();
+            username=$("#username").val();
+            pword=$("#pword").val();
+            street=$("#street").val();
+            town=$("#town").val();
+            region=$("#region").val();
+            ghanafee=$("#ghanafee").val();
+            foreignfee=$("#foreignfee").val();
+            pageUrl="schoolsajax.php?cmd=4&name="+name+"&open="+open+"&username="+username+"&pword="+pword+"&street="+street+"&town="+town+"&region="+region+"&ghanafee="+ghanafee+"&foreignfee="+foreignfee;
+            $.ajax(pageUrl,{async:true,complete:saveProfileComplete});
+            //prompt('url',pageUrl);
+            
+
+        }
+
+        function getProfileComplete(xhr, status){
+             if(status!="success"){
+                    alert(status);
+                    alert("Profile could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+
+            $("#name").val(obj.row[0].name);
+            $("#open").val(obj.row[0].open);
+            $("#username").val(obj.row[0].username);
+            $("#pword").val(obj.row[0].pword);
+            $("#street").val(obj.row[0].street);
+            $("#town").val(obj.row[0].town);
+            $("#region").val(obj.row[0].region);
+            $("#ghanafee").val(obj.row[0].ghanafee);
+            $("#foreignfee").val(obj.row[0].foreignfee);
+            }   
+        }
+
+        function getInfo(){
+            pageUrl="schoolsajax.php?cmd=3";
+            $.ajax(pageUrl,{async:true, complete:getProfileComplete});
+             //prompt('url',pageUrl);
+        }
+    </script>
+
 </head>
-<body>
+<body onload ="getInfo()";>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    <!--
 
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
 
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                    uniapp
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="dashboard.html">
+                    <a href="dashboard.php">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="user.html">
+                    <a href="profile.html">
                         <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="personal.html">
-                        <i class="pe-7s-user"></i>
-                        <p>Personal Information</p>
+                        <p>School Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="list.html">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="typography.html">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
+                        <p>Review Applicants</p>
                     </a>
                 </li>
                 <li>
@@ -94,18 +141,12 @@
                         <p>Notifications</p>
                     </a>
                 </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
             </ul>
     	</div>
     </div>
 
     <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed">
+        <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
@@ -114,7 +155,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User</a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -162,7 +203,6 @@
 										Dropdown
 										<b class="caret"></b>
 									</p>
-
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
@@ -175,7 +215,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="adminlogout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -188,6 +228,10 @@
 
         <div class="content">
             <div class="container-fluid">
+
+
+
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
@@ -197,22 +241,58 @@
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-9">
                                             <div class="form-group">
-                                                <label>Applicant ID</label>
-                                                <input type="text" class="form-control" disabled placeholder="StudentID" value="Creative Code Inc.">
+                                                <label>Name of School</label>
+                                                <input type="text" class="form-control" id="name">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
+                                                <label>Open for admissions?</label>
+                                <div class="field">
+                                    <select id="open" name="open" onchange="showUser(this.value)">
+                                        <option value="default">Select</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control" placeholder="Username" value="michael23">
+                                                <input type="text" class="form-control" id="username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="text" class="form-control" id="pword">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Street</label>
+                                                <input type="text" class="form-control" id="street">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" placeholder="Email">
+                                                <label>Town</label>
+                                                <input type="text" class="form-control" id="town">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Region</label>
+                                                <input type="text" class="form-control" id="region">
                                             </div>
                                         </div>
                                     </div>
@@ -220,88 +300,21 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="Company" value="Mike">
+                                                <label>Application fee for Ghanaians</label>
+                                                <input type="text" class="form-control" id="ghanafee">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                                                <label>Application fee for International Students</label>
+                                                <input type="text" class="form-control" id="foreignfee">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control" placeholder="City" value="Mike">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Country</label>
-                                                <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Postal Code</label>
-                                                <input type="number" class="form-control" placeholder="ZIP Code">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>About Me</label>
-                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="saveProfile()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-user">
-                            <div class="image">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                     <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
-
-                                      <h4 class="title">Mike Andrew<br />
-                                         <small>michael24</small>
-                                      </h4>
-                                    </a>
-                                </div>
-                                <p class="description text-center"> "Lamborghini Mercy <br>
-                                                    Your chick she so thirsty <br>
-                                                    I'm in that two seat Lambo"
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="text-center">
-                                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
 
                             </div>
                         </div>

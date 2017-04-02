@@ -1,3 +1,4 @@
+<?php include_once("schools.php"); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>Admin - Dashboard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,12 +30,55 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          // ['Task', 'Hours per Day'],
+          // ['Work',     11],
+          // ['Eat',      2],
+          // ['Commute',  2],
+          // ['Watch TV', 2],
+          // ['Sleep',    7]
+
+<?php   
+    $obj=new schools;
+    $schoolid = 1;
+    $result = $obj->getGender($schoolid);
+
+    $array = array();
+
+    while($row = $obj->fetch()){
+        $array[] = $row;
+    }
+?>
+        ['Gender', 'Applicants'],
+<?php
+    foreach($array as $row){
+        print ("['".$row['gender']."',".$row['count']."],");
+    }
+?>
+        ]);
+
+        var options = {
+          title: 'Gender'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
 </head>
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
     <!--
 
@@ -46,45 +90,27 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                    uniapp
                 </a>
             </div>
 
             <ul class="nav">
-                <li>
+                <li class="active">
                     <a href="dashboard.html">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="profile.html">
                         <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
+                        <p>School Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="list.html">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="typography.html">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
+                        <p>Review Applicants</p>
                     </a>
                 </li>
                 <li>
@@ -93,18 +119,12 @@
                         <p>Notifications</p>
                     </a>
                 </li>
-				<li class="active active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
             </ul>
     	</div>
     </div>
 
     <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed">
+        <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
@@ -113,7 +133,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Upgrade</a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -161,7 +181,6 @@
 										Dropdown
 										<b class="caret"></b>
 									</p>
-
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
@@ -174,7 +193,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="adminlogout.php">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -187,79 +206,21 @@
 
         <div class="content">
             <div class="container-fluid">
+
+
+
+
                 <div class="row">
-					<div class="col-md-8 col-md-offset-2">
-                        <div class="card">
-                            <div class="header text-center">
-                                <h4 class="title">Light Bootstrap Dashboard PRO</h4>
-                                <p class="category">Are you looking for more components? Please check our Premium Version of Light Bootstrap Dashboard.</p>
-								<br>
-                            </div>
-                            <div class="content table-responsive table-full-width table-upgrade">
-                                <table class="table">
-                                    <thead>
-                                        <th></th>
-                                    	<th class="text-center">Free</th>
-                                    	<th class="text-center">PRO</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        	<td>Components</td>
-                                        	<td>16</td>
-                                        	<td>115+</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Plugins</td>
-                                        	<td>4</td>
-                                        	<td>14+</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Example Pages</td>
-                                        	<td>4</td>
-                                        	<td>22+</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Documentation</td>
-                                        	<td><i class="fa fa-times text-danger"></i></td>
-                                        	<td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>SASS Files</td>
-											<td><i class="fa fa-times text-danger"></i></td>
-                                        	<td><i class="fa fa-check text-success"></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Login/Register/Lock Pages</td>
-											<td><i class="fa fa-times text-danger"></i></td>
-                                        	<td><i class="fa fa-check text-success"></td>
-                                        </tr>
-										<tr>
-                                        	<td>Premium Support</td>
-											<td><i class="fa fa-times text-danger"></i></td>
-                                        	<td><i class="fa fa-check text-success"></td>
-                                        </tr>
-										<tr>
-                                        	<td></td>
-											<td>Free</td>
-                                        	<td>Just $39</td>
-                                        </tr>
-										<tr>
-											<td></td>
-											<td>
-												<a href="#" class="btn btn-round btn-fill btn-default disabled">Current Version</a>
-											</td>
-											<td>
-												<a target="_blank" href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro/?ref=lbdupgrade" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
-											</td>
-										</tr>
-                                    </tbody>
-                                </table>
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="content">
+                                <div id="piechart" style="width: 900px; height: 500px;"></div>
 
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 
@@ -323,5 +284,22 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+        	demo.initChartist();
+
+        	$.notify({
+            	icon: 'pe-7s-gift',
+            	message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+    	});
+	</script>
 
 </html>

@@ -30,9 +30,14 @@ class applicants extends adb{
      function signup($firstname='none',$lastname='none',$email='none',$pword='none',$phone='none'){
     
           $strQuery = "insert into applicant SET firstname = '$firstname',lastname = '$lastname',email = '$email',pword = '$pword',phone = '$phone'";
+          if($this->query ($strQuery)){
+            $strQuery ="select last_insert_id() as id";
+            $this->query ($strQuery);
+            $last_id = $this->fetch();
+          }
           // echo $strQuery;
-          
-          return $this->query ($strQuery);
+          var_dump($last_id);
+          return $last_id;
 
      }
 
@@ -104,6 +109,57 @@ class applicants extends adb{
 
       function updateUniversity($universityid='none',$name='none',$address='none',$startdate='none',$major='none'){
         $strQuery="update university SET name='$name',address='$address',startdate='$startdate',major='$major' where universityid='$universityid'";
+        return $this->query($strQuery);
+     }
+
+
+      function newWassce($subject='none',$grade='none',$applicantid='none'){
+        $strQuery="insert into wassce SET subject='$subject',grade='$grade',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getWassce($applicantid='none'){
+        $strQuery="select * from wassce where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newIgsce($subject='none',$grade='none',$applicantid='none'){
+        $strQuery="insert into igsce SET subject='$subject',grade='$grade',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getIgsce($applicantid='none'){
+        $strQuery="select * from igsce where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newSat($reading='none',$writing='none',$maths='none',$applicantid='none'){
+        $strQuery="insert into sat SET reading='$reading',writing='$writing',maths='$maths',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+ 
+      function getSat($applicantid='none'){
+        $strQuery="select * from sat where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newToefl($writing='none',$reading='none',$listening='none',$speaking='none',$applicantid='none'){
+        $strQuery="insert into toefl SET writing='$writing',reading='$reading', listening='$listening',speaking='$speaking',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getToefl($applicantid='none'){
+        $strQuery="select * from wassce where applicantid = '$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function newOther($subject='none',$grade='none',$applicantid='none'){
+        $strQuery="insert into other SET subject='$subject',grade='$grade',applicantid ='$applicantid'";
+        return $this->query($strQuery);
+     }
+
+      function getOther($applicantid='none'){
+        $strQuery="select * from other where applicantid = '$applicantid'";
         return $this->query($strQuery);
      }
 
