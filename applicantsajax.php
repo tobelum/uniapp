@@ -71,20 +71,24 @@
 		getIgsce();
 		break;
 
-		case 7;
+		case 17;
 		newOther();
 		break;
 
-		case 8;
+		case 18;
 		getOther();
 		break;
 
-		case 9;
+		case 19;
 		newToefl();
 		break;
 
-		case 10;
+		case 20;
 		getToefl();
+		break;
+
+		case 21;
+		getDetails();
 		break;
 
 		default:
@@ -115,6 +119,7 @@ function signup() {
 	}
 	
 	else {
+		$sms=$obj->signupsms($phone);
 	 echo '{"result":1, "message": "Applicant sucessfully registered"}';
 	 $_SESSION['applicantid']=$a['id'];	
 	 echo $_SESSION['applicantid'];
@@ -227,67 +232,6 @@ function getPersonal() {
 }
 
 	
-// }
-
-// function saveActivity(){
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$name = $_REQUEST['name'];
-// 	$startmonth = $_REQUEST['startmonth'];
-// 	$startyear = $_REQUEST['startyear'];
-// 	$endmonth = $_REQUEST['endmonth'];
-// 	$endyear = $_REQUEST['endyear'];
-// 	$positions = $_REQUEST['positions'];
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 		$obj = new applicants();
-// 		$result=$obj->updateActivity($name,$startmonth,$startyear,$endmonth,$endyear,$positions,$applicantid);
-			
-// 			var_dump($result);
-
-// 			if (!$result) {
-// 				$res=$obj->newActivity($name,$startmonth,$startyear,$endmonth,$endyear,$positions,$applicantid);
-// 				var_dump($res);
-// 				if (!$res) {
-// 					echo '{"result":0 ,"message": "Activity failed to create."}';
-// 				}else{
-// 					echo '{"result":1, "message": "Activity created."}';
-// 				}
-// 				echo '{"result":0 ,"message": "Activity failed to update."}';
-// 			}else{
-// 	 			echo '{"result":1, "message": "Activity updated."}';
-// 			}
-	
-// }
-
-// function getActivity() {
-// 	include_once("applicants.php");
-// 	$obj = new applicants();
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 	$result = $obj->getActivity($applicantid);
-
-// 	if (!$result) {
-// 		echo '{"result":0 ,"message": "Could not display Activity"}';
-// 	}
-// 	else {
-// 		$row=$obj->fetch();
-// 		echo '{"result":1,"row":[';
-// 		while($row){
-// 			echo json_encode($row);
-
-// 			$row=$obj->fetch();
-// 			if($row!=false){
-// 				echo ",";
-// 			}
-// 		}
-// 		echo "]}";	
-// 	}
-	
-// }
 
 function newHighSchool(){
 	include_once("applicants.php");
@@ -683,6 +627,16 @@ function getOther() {
 		echo "]}";	
 	}
 	
+}
+
+
+function getDetails(){
+	if (($_REQUEST['id']=="")) {
+		echo '{"result":0, "message": "applicantid was not given"}';
+		return;
+	}	
+	 $_SESSION['applicantid']=$_REQUEST['id'];
+	 echo '{"result":1, "message": "Loading applicant details..."}';
 }
 
 ?>
