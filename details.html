@@ -54,6 +54,7 @@ getInfo();
                 // alert("applicantid: "+obj.row[0].applicantid);
 
             $("#applicantid").val(obj.row[0].applicantid);
+            $("#applicantid1").val(obj.row[0].applicantid);
             $("#title").val(obj.row[0].title);
             $("#email").val(obj.row[0].email);
             $("#firstname").val(obj.row[0].firstname);
@@ -176,6 +177,7 @@ getInfo();
         $.ajax(pageUrl,{async:true, complete:getWassceComplete});
        // prompt('url',pageUrl);
     }
+
 
 
     </script>
@@ -759,15 +761,21 @@ getInfo();
                                 <h4 class="title">Review</h4>
                             </div>
                             <div class="content">
-
+                                <form>
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Applicant ID</label>
+                                                <input type="text" class="form-control" disabled id="applicantid1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Review</label>
                                                 <input type="text" class="form-control" id="review">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Name of reviewer</label>
                                                 <input type="text" class="form-control" id="reviewer">
@@ -776,11 +784,22 @@ getInfo();
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Comment</label>
-                                                <input type="text" class="form-control" id="comment">
+                                                <div class="field">
+                                                    <select id="comment" name="comment" class="form-control">
+                                                        <option value="default">Select</option>
+                                                        <option>Not Reviewed</option>
+                                                        <option>Accepted</option>
+                                                        <option>Pending</option>
+                                                        <option>Rejected</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="saveReview()">Save</button>
+                                    <div class="clearfix"></div>
+                                </form>
                             </div>
                         </div>
                     </div>
