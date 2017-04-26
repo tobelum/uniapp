@@ -39,6 +39,22 @@
 		submit();
 		break;
 
+		case 9;
+		getReview();
+		break;
+
+		case 10;
+		saveReview();
+		break;
+
+		case 11;
+		getApplicants();
+		break;
+
+		case 12;
+		getPaid();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -234,6 +250,57 @@ function getCentral() {
 	
 }
 
+// function submit() {
+// 	if (($_REQUEST['schoolid']=="")) {
+// 		echo '{"result":0, "message": "Schoolid was not given"}';
+// 		return;
+// 	}
+	
+// 	include_once("application.php");
+// 	$obj = new application();
+// 	$schoolid= $_REQUEST['schoolid'];
+
+// 	$applicantid = $_SESSION['applicantid'];
+
+// 	$a = $obj->submit($applicantid,$schoolid);
+
+// 	if (!$a) {
+// 		echo '{"result":0 ,"message": "Could not submit application"}';
+// 	}
+	
+// 	else {
+// 	 echo '{"result": 1, "message": "Application submitted"}';	
+// 	}
+	
+// }
+
+function getReview() {
+	include_once("application.php");
+	$obj = new application();
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$result = $obj->getCentral($applicantid);
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display Application"}';
+	}
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
+	}
+	
+}
+
 function submit() {
 	if (($_REQUEST['schoolid']=="")) {
 		echo '{"result":0, "message": "Schoolid was not given"}';
@@ -254,6 +321,54 @@ function submit() {
 	
 	else {
 	 echo '{"result": 1, "message": "Application submitted"}';	
+	}
+	
+}
+
+function getApplicants() {
+	include_once("application.php");
+	$obj = new application();
+
+	$result = $obj->getApplicants();
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display applications"}';
+	}
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
+	}
+	
+}
+
+function getPaid() {
+	if (($_REQUEST['schoolid']=="")||($_REQUEST['applicantid']=="")) {
+		echo '{"result":0, "message": "Schoolid was not given"}';
+		return;
+	}
+	
+	include_once("application.php");
+	$obj = new application();
+	$schoolid= $_REQUEST['schoolid'];
+	$applicantid= $_REQUEST['applicantid'];
+
+	$a = $obj->paid($applicantid,$schoolid);
+
+	if (!$a) {
+		echo '{"result":0 ,"message": "Could update status"}';
+	}
+	
+	else {
+	 echo '{"result": 1, "message": "Payment status updated"}';	
 	}
 	
 }

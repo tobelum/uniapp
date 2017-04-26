@@ -12,7 +12,7 @@
 		break;
 
 		case 2:
-		login();
+		login();		
 		break;
 
 		case 3:
@@ -47,47 +47,7 @@
 		getUniversity();
 		break;
 
-		case 11:
-		newWassce();
-		break;
-
-		case 12:
-		getWassce();
-		break;
-
-		case 13:
-		newSat();
-		break;
-
-		case 14:
-		getSat();
-		break;
-
-		case 15:
-		newIgsce();
-		break;
-
-		case 16:
-		getIgsce();
-		break;
-
-		case 17;
-		newOther();
-		break;
-
-		case 18;
-		getOther();
-		break;
-
-		case 19;
-		newToefl();
-		break;
-
-		case 20;
-		getToefl();
-		break;
-
-		case 21;
+		case 11;
 		getDetails();
 		break;
 
@@ -112,13 +72,19 @@ function signup() {
 	$pword = $_REQUEST['pword'];
 	$phone= $_REQUEST['phone'];
 	
-	$a = $obj->signup($firstname,$lastname,$email,$pword,$phone);
+	$a = $obj->signup($firstname,$lastname,$email,$pword,$phone); 
 
 	if (!$a) {
 		echo '{"result":0 ,"message": "Could not register applicant"}';
 	}
 	
 	else {
+		// $to = "tobel.eze-okoli@ashesi.deu.gh";
+		// $subject = "My subject";
+		// $txt = "Hello world!";
+		// $headers = "From: UniApp";
+		// mail($to,$subject,$txt,$headers);
+
 		$sms=$obj->signupsms($phone);
 	 echo '{"result":1, "message": "Applicant sucessfully registered"}';
 	 $_SESSION['applicantid']=$a['id'];	
@@ -183,6 +149,9 @@ function fillPersonal(){
 	$parentemail = $_REQUEST['parentemail'];
 	$relationship = $_REQUEST['relationship'];
 	$parentjob = $_REQUEST['parentjob'];
+	$sponsorname = $_REQUEST['sponsorname'];
+	$sponsorphone = $_REQUEST['sponsorphone'];
+	$sponsoremail = $_REQUEST['sponsoremail'];
 
 	$applicantid = $_SESSION['applicantid'];
 
@@ -192,9 +161,9 @@ function fillPersonal(){
 			$expirydate,$street,$town,$region,$country,$birthdate,
 			$phone,$livewith,$married,$disable,$disability,$insurance,
 			$parentname,$alive,$parentphone,$parentemail,$relationship,
-			$parentjob);
+			$parentjob,$sponsorname,$sponsorphone,$sponsoremail);
 			
-			// var_dump($result);
+			var_dump($sponsorphone);
 
 			if (!$result) {
 				echo '{"result":0 ,"message": "Profile failed to update."}';
@@ -386,251 +355,8 @@ function getUniversity() {
 	
 }
 
-function newWassce(){
-	include_once("applicants.php");
-	$obj = new applicants();
 
-	$subject = $_REQUEST['subject'];
-	$grade = $_REQUEST['grade'];
-	$applicantid = $_SESSION['applicantid'];
-
-		$obj = new applicants();
-		$result=$obj->newWassce($subject,$grade,$applicantid);
-			
-			//var_dump($result);
-
-			if (!$result) {
-				echo '{"result":0 ,"message": "WASSCE score failed to add."}';
-			}else{
-	 			echo '{"result":1, "message": "WASSCE score added."}';
-			}
-	
-}
-
-function getWassce() {
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getWassce($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display WASSCE scores"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
-
-function newIgsce(){
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$subject = $_REQUEST['subject'];
-	$grade = $_REQUEST['grade'];
-	$applicantid = $_SESSION['applicantid'];
-
-		$obj = new applicants();
-		$result=$obj->newIgsce($subject,$grade,$applicantid);
-			
-			//var_dump($result);
-
-			if (!$result) {
-				echo '{"result":0 ,"message": "IGSCE score failed to add."}';
-			}else{
-	 			echo '{"result":1, "message": "IGSCE score added."}';
-			}
-	
-}
-
-function getIgsce() {
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getIgsce($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display IGSCE scores"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
-
-function newSat(){
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$reading = $_REQUEST['reading'];
-	$writing = $_REQUEST['writing'];
-	$maths = $_REQUEST['maths'];
-	$applicantid = $_SESSION['applicantid'];
-
-		$obj = new applicants();
-		$result=$obj->newSat($reading,$writing,$maths,$applicantid);
-			
-			//var_dump($result);
-
-			if (!$result) {
-				echo '{"result":0 ,"message": "SAT score failed to add."}';
-			}else{
-	 			echo '{"result":1, "message": "SAT score added."}';
-			}
-	
-}
-
-function getSat() {
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getSat($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display SAT scores"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
-
-function newToefl(){
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$writing = $_REQUEST['writing'];
-	$reading = $_REQUEST['reading'];
-	$listening = $_REQUEST['listening'];
-	$speaking = $_REQUEST['speaking'];
-	$applicantid = $_SESSION['applicantid'];
-
-		$obj = new applicants();
-		$result=$obj->newToefl($writing,$reading,$listening,$speaking,$applicantid);
-			
-			//var_dump($result);
-
-			if (!$result) {
-				echo '{"result":0 ,"message": "TOEFL scores failed to add."}';
-			}else{
-	 			echo '{"result":1, "message": "TOEFL scores added."}';
-			}
-	
-}
-
-function getToefl() {
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getToefl($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display TOEFL scores"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
-
-function newOther(){
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$subject = $_REQUEST['subject'];
-	$grade = $_REQUEST['grade'];
-	$applicantid = $_SESSION['applicantid'];
-
-		$obj = new applicants();
-		$result=$obj->newOther($subject,$grade,$applicantid);
-			
-			//var_dump($result);
-
-			if (!$result) {
-				echo '{"result":0 ,"message": "Score failed to add."}';
-			}else{
-	 			echo '{"result":1, "message": "Score added."}';
-			}
-	
-}
-
-function getOther() {
-	include_once("applicants.php");
-	$obj = new applicants();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getOther($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display scores"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
-
-
-function getDetails(){
+function showDetails(){
 	if (($_REQUEST['id']=="")) {
 		echo '{"result":0, "message": "applicantid was not given"}';
 		return;

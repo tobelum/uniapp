@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Academic History - UniApp</title>
+	<title>Examinations - UniApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -37,6 +37,14 @@
 
     <script type="text/javascript">
 
+        window.onload=function(){
+            getWassce();
+            getIgsce();
+            getSat();
+            getToefl();
+            getOther();
+         }
+
 
     function getWassceComplete(xhr, status){
              if(status!="success"){
@@ -53,7 +61,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].subject+"</td><td>"+obj.row[length-1].grade+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='#'>Edit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].subject+"</td><td>"+obj.row[length-1].grade+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delWassce(\""+obj.row[length-1].id+"\")'>Delete</button></td></tr>";
                     length-=1;
                 }
                 wassce.innerHTML=result;
@@ -62,15 +70,46 @@
 
     function getWassce()
     {
-        pageUrl="applicantsajax.php?cmd=12";
+        pageUrl="examsajax.php?cmd=2";
         $.ajax(pageUrl,{async:true, complete:getWassceComplete});
-       // prompt('url',pageUrl);
+       //prompt('url',pageUrl);
     }
+
+
+        function delWassceComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    //alert("status is "+status);
+                    alert("Score could not be deleted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="exams.html";
+
+            }
+         }
+
+        function delWassce(id){
+                var pageUrl="examsajax.php?cmd=11&id="+id;
+                $.ajax(pageUrl,{async:true,complete:delWassceComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
 
 
     function addWassceComplete(xhr, status){
             if(status!="success"){
-                alert("status is "+status);
+                //alert("status is "+status);
+                //alert("Score could not be added");
                 return;
             }
             var obj = $.parseJSON(xhr.responseText);
@@ -86,17 +125,347 @@
             subject=$("#subject").val();
             grade=$("#grade").val();
 
-            pageUrl="applicantsajax.php?cmd=11&subject="+subject+"&grade="+grade;
+            pageUrl="examsajax.php?cmd=1&subject="+subject+"&grade="+grade;
             $.ajax(pageUrl,{async:true,complete:addWassceComplete});
            //prompt('url',pageUrl);
             
 
         }
+
+    function addIgsceComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            var obj = $.parseJSON(xhr.responseText);
+           
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Score has been added.");
+            }
+        }
+
+    function addigsce(){
+            subject=$("#igscesubject").val();
+            grade=$("#igscegrade").val();
+
+            pageUrl="examsajax.php?cmd=5&subject="+subject+"&grade="+grade;
+            $.ajax(pageUrl,{async:true,complete:addIgsceComplete});
+           //prompt('url',pageUrl);
+        }
+
+    function getIgsceComplete(xhr, status){
+             if(status!="success"){
+                    alert("status is "+status);
+                    alert("Scores could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                var result="";
+                var length = obj.row.length;
+
+                while(length>0){
+                    result+="<tr><td>"+obj.row[length-1].subject+"</td><td>"+obj.row[length-1].grade+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delIgsce(\""+obj.row[length-1].id+"\")'>Delete</button></td></tr>";
+                    length-=1;
+                }
+                igsce.innerHTML=result;
+            }      
+    }
+
+    function getIgsce()
+    {
+        pageUrl="examsajax.php?cmd=6";
+        $.ajax(pageUrl,{async:true, complete:getIgsceComplete});
+       // prompt('url',pageUrl);
+    }
+
+        function delIgsceComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    //alert("status is "+status);
+                    alert("Score could not be deleted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="exams.html";
+
+            }
+         }
+
+        function delIgsce(id){
+                var pageUrl="examsajax.php?cmd=12&id="+id;
+                $.ajax(pageUrl,{async:true,complete:delIgsceComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
+    function getSatComplete(xhr, status){
+             if(status!="success"){
+                    alert("status is "+status);
+                    alert("Scores could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                var result="";
+                var length = obj.row.length;
+
+                while(length>0){
+                    result+="<tr><td>"+obj.row[length-1].reading+"</td><td>"+obj.row[length-1].writing+"</td><td>"+obj.row[length-1].maths+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delSat()'>Delete</button></td></tr>";
+                    length-=1;
+                }
+                sat.innerHTML=result;
+            }      
+    }
+
+        function delSatComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    //alert("status is "+status);
+                    alert("Score could not be deleted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="exams.html";
+
+            }
+         }
+
+        function delSat(){
+                var pageUrl="examsajax.php?cmd=13";
+                $.ajax(pageUrl,{async:true,complete:delSatComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
+
+    function getSat()
+    {
+        pageUrl="examsajax.php?cmd=4";
+        $.ajax(pageUrl,{async:true, complete:getSatComplete});
+       // prompt('url',pageUrl);
+    }
+
+    function addSatComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            var obj = $.parseJSON(xhr.responseText);
+           
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Score has been added.");
+            }
+        }
+
+    function insertsat(){
+            reading=$("#satreading").val();
+             writing=$("#satwriting").val();
+             maths=$("#satmaths").val();
+
+             pageUrl="examsajax.php?cmd=3&reading="+reading+"&writing="+writing+"&maths="+maths;
+            $.ajax(pageUrl,{async:true,complete:addSatComplete});
+           //prompt('url',pageUrl);
+        }
+
+    function getToeflComplete(xhr, status){
+             if(status!="success"){
+                    alert("status is "+status);
+                    alert("Scores could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                var result="";
+                var length = obj.row.length;
+
+                while(length>0){
+                    result+="<tr><td>"+obj.row[length-1].writing+"</td><td>"+obj.row[length-1].reading+"</td><td>"+obj.row[length-1].listening+"</td><td>"+obj.row[length-1].speaking+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='deltoefl()'>Delete</button></td></tr>";
+                    length-=1;
+                }
+                toefl.innerHTML=result;
+            }      
+    }
+
+        function deltoeflComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    //alert("status is "+status);
+                    alert("Score could not be deleted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="exams.html";
+
+            }
+         }
+
+        function deltoefl(){
+                var pageUrl="examsajax.php?cmd=14";
+                $.ajax(pageUrl,{async:true,complete:deltoeflComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
+
+    function getToefl()
+    {
+        pageUrl="examsajax.php?cmd=10";
+        $.ajax(pageUrl,{async:true, complete:getToeflComplete});
+       // prompt('url',pageUrl);
+    }
+
+    function addtoeflComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            var obj = $.parseJSON(xhr.responseText);
+           
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Score has been added.");
+            }
+        }
+
+    function addtoefl(){
+            writing=$("#writing").val();
+             reading=$("#reading").val();
+             listening=$("#listening").val();
+             speaking=$("#speaking").val();
+
+
+             pageUrl="examsajax.php?cmd=9&writing="+writing+"&reading="+reading+"&listening="+listening+"&speaking="+speaking;
+            $.ajax(pageUrl,{async:true,complete:addtoeflComplete});
+           //prompt('url',pageUrl);
+        }
+
+    function addOtherComplete(xhr, status){
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            var obj = $.parseJSON(xhr.responseText);
+           
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("Score has been added.");
+            }
+        }
+
+    function addother(){
+            subject=$("#othersubject").val();
+            grade=$("#othergrade").val();
+
+            pageUrl="examsajax.php?cmd=7&subject="+subject+"&grade="+grade;
+            $.ajax(pageUrl,{async:true,complete:addOtherComplete});
+           //prompt('url',pageUrl);
+        }
+
+    function getOtherComplete(xhr, status){
+             if(status!="success"){
+                    alert("status is "+status);
+                    alert("Scores could not be displayed");
+                    return;
+                }
+                
+            var obj= $.parseJSON(xhr.responseText); 
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                var result="";
+                var length = obj.row.length;
+
+                while(length>0){
+                    result+="<tr><td>"+obj.row[length-1].subject+"</td><td>"+obj.row[length-1].grade+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delOther(\""+obj.row[length-1].id+"\")'>Delete</button></td></tr>";
+                    length-=1;
+                }
+                other.innerHTML=result;
+            }      
+    }
+
+    function getOther()
+    {
+        pageUrl="examsajax.php?cmd=8";
+        $.ajax(pageUrl,{async:true, complete:getOtherComplete});
+       // prompt('url',pageUrl);
+    }
+
+        function delOtherComplete(xhr, status){
+                //alert("status is" + status);
+
+                if(status!="success"){
+                    //alert("status is "+status);
+                    alert("Score could not be deleted");
+                    return;
+                }
+                
+                var obj= $.parseJSON(xhr.responseText);
+                
+                //alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
+                    
+                }else{   
+                    alert(obj.message); 
+                    window.location="exams.html";
+
+            }
+         }
+
+        function delOther(id){
+                var pageUrl="examsajax.php?cmd=15&id="+id;
+                $.ajax(pageUrl,{async:true,complete:delOtherComplete});
+                // alert("loading");
+                //prompt('url',pageUrl);
+           }
+
+
+
     </script>
 
 
 </head>
-<body onload="getWassce();">
+<body>
 
 
 <div class="wrapper">
@@ -117,12 +486,6 @@
                     <a href="personal.html">
                         <i class="pe-7s-user"></i>
                         <p>Personal</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="sponsor.html">
-                        <i class="pe-7s-users"></i>
-                        <p>Sponsor</p>
                     </a>
                 </li>
                  <li>
@@ -154,13 +517,7 @@
                         <i class="pe-7s-cash"></i>
                         <p>Payment</p>
                     </a>
-                </li>               
-                 <li>
-                    <a href="explore.html">
-                        <i class="pe-7s-world"></i>
-                        <p>Explore</p>
-                    </a>
-                </li> 
+                </li>    
             </ul>
     	</div>
     </div>
@@ -175,67 +532,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User</a>
+                    <a class="navbar-brand" href="#">Examinations</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">5</span>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-                        <li>
                             <a href="logout.php">
                                 <p>Log out</p>
                             </a>
@@ -484,13 +785,13 @@
 </div>
 <!--  End Modal -->
 
-<!-- Sart Modal -->
+<!-- Sart IGSCE Modal -->
 <div class="modal fade" id="igsceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="material-icons">close</i>
+                    <i class="material-icons">X</i>
                 </button>
                 <h4 class="modal-title">Add IGSCE Subject and grade</h4>
             </div>
@@ -501,13 +802,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Subject</label>
-                                                <input type="text" class="form-control" placeholder="Mathematics" id="subject">
+                                                <input type="text" class="form-control" placeholder="Mathematics" id="igscesubject">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Grade</label>
-                                                <input type="text" class="form-control" placeholder="A1" id="grade">
+                                                <input type="text" class="form-control" placeholder="A1" id="igscegrade">
                                             </div>
                                         </div>
                                     </div>
@@ -538,13 +839,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Subject</label>
-                                                <input type="text" class="form-control" placeholder="Mathematics" id="subject">
+                                                <input type="text" class="form-control" placeholder="Mathematics" id="othersubject">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Grade</label>
-                                                <input type="text" class="form-control" placeholder="A1" id="grade">
+                                                <input type="text" class="form-control" placeholder="A1" id="othergrade">
                                             </div>
                                         </div>
 
@@ -576,25 +877,25 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Critical reading" id="reading">
+                                                <label>Critical reading</label>
+                                                <input type="text" class="form-control" id="satreading">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Writing" id="writing">
+                                                <label>Writing</label>
+                                                <input type="text" class="form-control" id="satwriting">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Maths" id="maths">
+                                                <label>Maths</label>
+                                                <input type="text" class="form-control" id="satmaths">
                                             </div>
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addsat()">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="insertsat()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
@@ -618,36 +919,33 @@
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Writing" id="writing">
+                                                <label>Writing</label>
+                                                <input type="text" class="form-control" id="writing">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Reading" id="reading">
+                                                <label>Reading</label>
+                                                <input type="text" class="form-control" id="reading">
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Listening" id="listening">
+                                                <label>Listening</label>
+                                                <input type="text" class="form-control" id="listening">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Score</label>
-                                                <input type="text" class="form-control" placeholder="Speaking" id="speaking">
+                                                <label>Speaking</label>
+                                                <input type="text" class="form-control" id="speaking">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addsat()">Save</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="addtoefl()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

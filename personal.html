@@ -46,7 +46,7 @@
                 alert("server response: "+obj.message);
             }else{
                 alert("Profile has been saved.");
-                document.getElementById('menu-sponsor').click();
+                document.getElementById('menu-academic').click();
             }
         }
 
@@ -76,8 +76,11 @@
             parentemail=$("#parentemail").val();
             relationship=$("#relationship").val();
             parentjob=$("#parentjob").val();
+            sponsorname=$("#sponsorname").val();
+            sponsorphone=$("#sponsorphone").val();
+            sponsoremail=$("#sponsoremail").val();
 
-            pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance+"&parentname="+parentname+"&alive="+alive+"&parentphone="+parentphone+"&parentemail="+parentemail+"&relationship="+relationship+"&parentjob="+parentjob;
+            pageUrl="applicantsajax.php?cmd=3&title="+title+"&email="+email+"&firstname="+firstname+"&lastname="+lastname+"&gender="+gender+"&nationality="+nationality+"&passport="+passport+"&expirydate="+expirydate+"&street="+street+"&town="+town+"&region="+region+"&country="+country+"&birthdate="+birthdate+"&phone="+phone+"&livewith="+livewith+"&married="+married+"&disable="+disable+"&disability="+disability+"&insurance="+insurance+"&parentname="+parentname+"&alive="+alive+"&parentphone="+parentphone+"&parentemail="+parentemail+"&relationship="+relationship+"&parentjob="+parentjob+"&sponsorname="+sponsorname+"&sponsorphone="+sponsorphone+"&sponsoremail="+sponsoremail;
             $.ajax(pageUrl,{async:true,complete:savePersonalComplete});
             //prompt('url',pageUrl);
             
@@ -122,7 +125,10 @@
             $("#parentphone").val(obj.row[0].parentphone);
             $("#parentemail").val(obj.row[0].parentemail);
             $("#relationship").val(obj.row[0].relationship);
-            $("#parentjob").val(obj.row[0].parentjob);
+            $("#sponsornam").val(obj.row[0].parentjob);
+            $("#sponsorname").val(obj.row[0].sponsorname);
+            $("#sponsorphone").val(obj.row[0].sponsorphone);
+            $("#sponsoremail").val(obj.row[0].sponsoremail);
             }   
         }
 
@@ -157,12 +163,6 @@
                         <p>Personal</p>
                     </a>
                 </li>
-                <li>
-                    <a href="sponsor.html" id="menu-sponsor">
-                        <i class="pe-7s-users"></i>
-                        <p>Sponsor</p>
-                    </a>
-                </li>
                  <li>
                     <a href="academic.html">
                         <i class="pe-7s-notebook"></i>
@@ -192,13 +192,7 @@
                         <i class="pe-7s-cash"></i>
                         <p>Payment</p>
                     </a>
-                </li>               
-                 <li>
-                    <a href="explore.html">
-                        <i class="pe-7s-world"></i>
-                        <p>Explore</p>
-                    </a>
-                </li> 
+                </li>    
             </ul>
     	</div>
     </div>
@@ -213,66 +207,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User</a>
+                    <a class="navbar-brand" href="#">Personal</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">5</span>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
                         <li>
                             <a href="logout.php">
                                 <p>Log out</p>
@@ -306,7 +245,7 @@
                                             <div class="form-group">
                                                 <label>Title</label>
                                 <div class="field">
-                                    <select id="title" name="title" onchange="showUser(this.value)">
+                                    <select class="form-control" id="title" name="title" onchange="showUser(this.value)">
                                         <option value="default">Select</option>
                                         <option>Mr.</option>
                                         <option>Mrs.</option>
@@ -343,7 +282,7 @@
                                             <div class="form-group">
                                                 <label>Gender</label>
                                 <div class="field">
-                                    <select id="gender" name="gender">
+                                    <select class="form-control" id="gender" name="gender">
                                         <option value="default">Select</option>
                                         <option>Male</option>
                                         <option>Female</option>
@@ -365,7 +304,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Expiry date</label>
+                                                <label>Passport Expiry date</label>
                                                 <input type="date" class="form-control" id="expirydate">
                                             </div>
                                         </div>
@@ -419,7 +358,7 @@
                                             <div class="form-group">
                                                 <label>Who do you live with?</label>
                                 <div class="field">
-                                    <select id="livewith" name="livewith">
+                                    <select class="form-control" id="livewith" name="livewith">
                                         <option value="default">Select</option>
                                         <option>Alone</option>
                                         <option>Parents</option>
@@ -433,7 +372,7 @@
                                             <div class="form-group">
                                                 <label>Are you married?</label>
                                 <div class="field">
-                                    <select id="married" id="married">
+                                    <select class="form-control" id="married" id="married">
                                         <option value="default">Select</option>
                                         <option>Yes</option>
                                         <option>No</option>
@@ -449,7 +388,7 @@
                                             <div class="form-group">
                                                 <label>Do you have a disability?</label>
                                     <div class="field">
-                                        <select id="disable" name="disable">
+                                        <select class="form-control" id="disable" name="disable">
                                             <option value="default">Select</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -467,7 +406,7 @@
                                             <div class="form-group">
                                                 <label>Do you have medical insurance?</label>
                                 <div class="field">
-                                    <select id="insurance" id="insurance">
+                                    <select class="form-control" id="insurance" id="insurance">
                                         <option value="default">Select</option>
                                         <option>Yes</option>
                                         <option>No</option>
@@ -487,7 +426,7 @@
                                             <div class="form-group">
                                                 <label>Is Parent/Guardian alive?</label>
                                                      <div class="field">
-                                                        <select id="alive" name="alive">
+                                                        <select class="form-control"  id="alive" name="alive">
                                                             <option value="default">Select</option>
                                                             <option>Yes</option>
                                                             <option>No</option>
@@ -499,13 +438,13 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Parent/Guardian's Phone</label>
                                                 <input type="number" class="form-control" placeholder="Phone" id="parentphone">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Parent/Guardian's Email</label>
                                                 <input type="text" class="form-control" placeholder="Email" id="parentemail">
@@ -514,13 +453,13 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Parent/Guardian's Relationship</label>
                                                 <input type="text" class="form-control" placeholder="Relationship" id="relationship">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Occupation of Parent/Guardian</label>
                                                 <input type="text" class="form-control" placeholder="Occupation" id="parentjob">
@@ -528,8 +467,32 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Name of Sponsor</label>
+                                                <input type="text" class="form-control" id="sponsorname">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="savePersonal()">Save and Continue</button>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Sponsor's phone</label>
+                                                <input type="text" class="form-control" id="sponsorphone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Sponsor's email</label>
+                                                <input type="text" class="form-control" id="sponsoremail">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-info btn-fill pull-right" onclick="savePersonal()">Save</button>
                                     <div class="clearfix"></div>
                                 </form>
 
@@ -568,9 +531,6 @@
                         </li>
                     </ul>
                 </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
             </div>
         </footer>
 

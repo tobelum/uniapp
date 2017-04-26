@@ -43,7 +43,7 @@ class schools extends adb{
      // }
 
      function getApplicants($schoolid='none'){
-        $strQuery = "select applicant.applicantid, applicant.firstname, applicant.lastname, application.status,application.comment from applicant, 
+        $strQuery = "select applicant.applicantid, applicant.firstname, applicant.lastname, application.status,application.comment, application.paid from applicant, 
         application where application.schoolid='$schoolid' && applicant.applicantid =application.applicantid";
         return $this->query($strQuery);
      }

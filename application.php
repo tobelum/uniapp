@@ -31,8 +31,14 @@ class application extends adb{
      }
 
      function getMySchools($applicantid='none'){
-        $strQuery="select school.name,school.schoolid,application.status,school.username,school.ghanafee, school.foreignfee 
-        from school,application where application.applicantid = '$applicantid' && application.schoolid=school.schoolid";
+        $strQuery="select school.name,school.schoolid,application.status,school.username,school.ghanafee, application.paid, school.foreignfee, 
+        school.paymenturl from school,application where application.applicantid = '$applicantid' && application.schoolid=school.schoolid";
+        return $this->query($strQuery);
+     }
+
+    function getApplicants(){
+        $strQuery="select applicant.phone, school.name,school.schoolid, applicant.applicantid, applicant.firstname, applicant.lastname,
+         application.paid from school,application,applicant where application.applicantid = applicant.applicantid && application.schoolid=school.schoolid";
         return $this->query($strQuery);
      }
 
@@ -69,7 +75,10 @@ class application extends adb{
         $strQuery="update application SET review='$review',reviewer='$reviewer',comment='$comment' where applicantid='$applicantid' && schoolid='$schoolid'";
         return $this->query($strQuery);
      }
-
+     function paid($applicantid='none',$schoolid='none'){
+        $strQuery="update application SET paid = 'Paid' where applicantid='$applicantid' && schoolid='$schoolid'";
+        return $this->query($strQuery);
+     }
 
    }
 

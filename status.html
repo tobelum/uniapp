@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Schools - UniApp</title>
+	<title>Admin - UniApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,12 +29,13 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <script type="text/javascript">
 
-    function getSchoolsComplete(xhr, status){
+    <script>
+
+    function getApplicantsComplete(xhr, status){
              if(status!="success"){
                     alert("status is "+status);
-                    alert("Schools could not be displayed");
+                    alert("Applications could not be displayed");
                     return;
                 }
                 
@@ -46,54 +47,26 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].open+"</td><td>"+obj.row[length-1].street+", "+obj.row[length-1].town+", "+obj.row[length-1].region+"</td><td><a class='btn btn-info btn-fill pull-right' href='\""+obj.row[length-1].websiteurl+"\"' target='_blank'> Visit Website</a></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='addSchool("+obj.row[length-1].schoolid+")'>Add School</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].applicantid+"</td><td>"+obj.row[length-1].firstname+" "+obj.row[length-1].lastname+"</td><td>"+obj.row[length-1].phone+"</td><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].paid+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='paid("+obj.row[length-1].applicantid+","+obj.row[length-1].schoolid+")'>Paid</button></td></tr>";
                     length-=1;
                 }
-                viewSchools.innerHTML=result;
+                applicants.innerHTML=result;
             }      
     }
 
-    function getSchools()
+    function getApplicants()
     {
-        pageUrl="applicationajax.php?cmd=1";
-        $.ajax(pageUrl,{async:true, complete:getSchoolsComplete});
-    }
-
-    function getMySchoolsComplete(xhr, status){
-             if(status!="success"){
-                    alert("status is "+status);
-                    alert("Schools could not be displayed");
-                    return;
-                }
-                
-            var obj= $.parseJSON(xhr.responseText); 
-            if(obj.result==0){
-                alert("server response: "+obj.message);
-            }else{
-                var result="";
-                var length = obj.row.length;
-
-                while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].status+"</td><td>"+obj.row[length-1].paid+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='getSch(\""+obj.row[length-1].username+"\")'>Complete Application</button></td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delSch(\""+obj.row[length-1].schoolid+"\")'>Delete Application</button></td></tr>";
-                    length-=1;
-                }
-                myschools.innerHTML=result;
-            }      
-    }
-
-    function getMySchools()
-    {
-        pageUrl="applicationajax.php?cmd=2";
-        $.ajax(pageUrl,{async:true, complete:getMySchoolsComplete});
+        pageUrl="applicationajax.php?cmd=11";
+        $.ajax(pageUrl,{async:true, complete:getApplicantsComplete});
         
     }
 
-        function addSchoolComplete(xhr, status){
+        function getPaidComplete(xhr, status){
                 //alert("status is" + status);
 
                 if(status!="success"){
                     alert("status is "+status);
-                    alert("School could not be added");
+                    alert("Payment status could not be updated");
                     return;
                 }
                 
@@ -105,55 +78,20 @@
                     
                 }else{   
                     alert(obj.message); 
-                    window.location="schools.html";
+                    window.location="status.html";
 
             }
          }
 
-        function addSchool(schoolid){
-                var pageUrl="applicationajax.php?cmd=3&schoolid="+schoolid;
-                $.ajax(pageUrl,{async:true,complete:addSchoolComplete});
-                // alert("loading");
-                //prompt('url',pageUrl);
-           }
-
-        function getSch(username){
-            //alert("here");
-            window.location=username+".html";
-        }
-
-        function delSchComplete(xhr, status){
-                //alert("status is" + status);
-
-                if(status!="success"){
-                    alert("status is "+status);
-                    alert("School could not be deleted");
-                    return;
-                }
-                
-                var obj= $.parseJSON(xhr.responseText);
-                
-                //alert("hey");
-                if(obj.result==0){
-                    alert("server response: "+obj.message);
-                    
-                }else{   
-                    alert(obj.message); 
-                    window.location="schools.html";
-
-            }
-         }
-
-        function delSch(schoolid){
-                var pageUrl="applicationajax.php?cmd=4&schoolid="+schoolid;
-                $.ajax(pageUrl,{async:true,complete:delSchComplete});
-                // alert("loading");
-                //prompt('url',pageUrl);
-           }
+    function paid(applicantid,schoolid)
+    {
+        pageUrl="applicationajax.php?cmd=12&applicantid="+applicantid+"&schoolid="+schoolid;
+        $.ajax(pageUrl,{async:true, complete:getPaidComplete});
+    }
 
     </script>
 </head>
-<body onload="getSchools(); getMySchools()">
+<body onload="getApplicants()">
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -169,42 +107,18 @@
             </div>
 
             <ul class="nav">
-                <li>
-                    <a href="personal.html">
-                        <i class="pe-7s-user"></i>
-                        <p>Personal</p>
-                    </a>
-                </li>
-                 <li>
-                    <a href="academic.html">
-                        <i class="pe-7s-notebook"></i>
-                        <p>Academic history</p>
-                    </a>
-                </li>
-                 <li>
-                    <a href="attachments.html">
-                        <i class="pe-7s-paperclip"></i>
-                        <p>Attachments</p>
-                    </a>
-                </li>
-                 <li>
-                    <a href="exams.html">
-                        <i class="pe-7s-medal"></i>
-                        <p>Examinations</p>
-                    </a>
-                </li>               
-                 <li class="active">
-                    <a href="schools.html">
-                        <i class="pe-7s-study"></i>
-                        <p>Schools</p>
-                    </a>
-                </li> 
-                 <li>
-                    <a href="payment.html">
+                <li class="active">
+                    <a href="status.html">
                         <i class="pe-7s-cash"></i>
-                        <p>Payment</p>
+                        <p>Payment status</p>
                     </a>
-                </li>  
+                </li>
+                 <li>
+                    <a href="register.html">
+                        <i class="pe-7s-study"></i>
+                        <p>Register School</p>
+                    </a>
+                </li>     
             </ul>
     	</div>
     </div>
@@ -219,9 +133,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Schools</a>
+                    <a class="navbar-brand" href="#">Applications</a>
                 </div>
                 <div class="collapse navbar-collapse">
+
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="logout.php">
@@ -234,48 +149,26 @@
             </div>
         </nav>
 
-        <div class="content">
+
+<div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">List of Schools</h4>
-                                <p class="category">Click on the "Add School" button to add the school to your application list</p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <th>Name</th>
-                                        <th>Open?</th>
-                                        <th>Address</th>
-                                        <th></th>
-                                        <th></th>
-                                    </thead>
-                                    <tbody id="viewSchools">
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">My applications</h4>
-                                <p class="category">Click on the "Complete Application" button to complete your application</p>
+                                <h4 class="title">Applications</h4>
+                                <p class="category">Change the payment status</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
+                                        <th>Applicant ID</th>
                                         <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Paid</th>                  
+                                        <th>Phone Number</th>
+                                        <th>School</th>
+                                        <th>Payment Status</th>                  
                                     </thead>
-                                    <tbody id ="myschools">
+                                    <tbody id ="applicants">
                                         <!-- <tr>
                                             <td>1</td>
                                             <td><button type="submit" class="btn btn-info btn-fill pull-right">View Application</button></td>

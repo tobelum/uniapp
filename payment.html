@@ -46,7 +46,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].status+"</td><td>"+obj.row[length-1].ghanafee+"</td><td>"+obj.row[length-1].foreignfee+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='pay(\""+obj.row[length-1].schoolid+"\")'>Pay</button></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='submit(\""+obj.row[length-1].schoolid+"\")'>Submit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].status+"</td><td>"+obj.row[length-1].ghanafee+"</td><td>"+obj.row[length-1].foreignfee+"</td><td><a class='btn btn-info btn-fill pull-right' href='\""+obj.row[length-1].paymenturl+"\"' target='_blank'>Pay</a></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='submit(\""+obj.row[length-1].schoolid+"\")'>Submit</button></td></tr>";
                     length-=1;
                 }
                 myschools.innerHTML=result;
@@ -108,12 +108,6 @@
                         <p>Personal</p>
                     </a>
                 </li>
-                <li>
-                    <a href="sponsor.html">
-                        <i class="pe-7s-users"></i>
-                        <p>sponsor</p>
-                    </a>
-                </li>
                  <li>
                     <a href="academic.html">
                         <i class="pe-7s-notebook"></i>
@@ -143,13 +137,7 @@
                         <i class="pe-7s-cash"></i>
                         <p>Payment</p>
                     </a>
-                </li>               
-                 <li>
-                    <a href="explore.html">
-                        <i class="pe-7s-world"></i>
-                        <p>Explore</p>
-                    </a>
-                </li> 
+                </li>    
             </ul>
     	</div>
     </div>
@@ -164,66 +152,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User</a>
+                    <a class="navbar-brand" href="#">Payment</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">5</span>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
                         <li>
                             <a href="logout.php">
                                 <p>Log out</p>
