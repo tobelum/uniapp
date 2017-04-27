@@ -28,7 +28,7 @@
 		break;
 
 		case 6:
-		updateHighSchool();
+		delHighSchool();
 		break;
 
 		case 7;
@@ -40,7 +40,7 @@
 		break;
 
 		case 9;
-		updateUniversity();
+		delUniversity();
 		break;
 
 		case 10;
@@ -228,28 +228,20 @@ function newHighSchool(){
 	
 }
 
-function updateHighSchool(){
+function delHighSchool(){
 	include_once("applicants.php");
 	$obj = new applicants();
 
-	$highschoolid = $_REQUEST['highschoolid'];
-	$name = $_REQUEST['name'];
-	$address = $_REQUEST['address'];
-	$startyear = $_REQUEST['startyear'];
-	$endyear = $_REQUEST['endyear'];
-	$certificate = $_REQUEST['certificate'];
-	$language = $_REQUEST['language'];
-
-	$applicantid = $_SESSION['applicantid'];
+	$highschoolid = $_REQUEST['id'];
 
 		$obj = new applicants();
 	
-				$res=$obj->updateHighSchool($highschoolid,$name,$address,$startyear,$endyear,$certificate,$language);
+				$res=$obj->delHighSchool($highschoolid);
 				//var_dump($res);
 				if (!$res) {
-				echo '{"result":0 ,"message": "HighSchool failed to update."}';
+				echo '{"result":0 ,"message": "Failed to remove HighSchool."}';
 			}else{
-	 			echo '{"result":1, "message": "HighSchool updated."}';
+	 			echo '{"result":1, "message": "HighSchool removed."}';
 			}
 	
 }
@@ -305,25 +297,20 @@ function newUniversity(){
 	
 }
 
-function updateUniversity(){
+function delUniversity(){
 	include_once("applicants.php");
 	$obj = new applicants();
 
-	$universityid = $_REQUEST['universityid'];
-	$name = $_REQUEST['name'];
-	$address = $_REQUEST['address'];
-	$startdate = $_REQUEST['startdate'];
-	$major = $_REQUEST['major'];
-	$applicantid = $_SESSION['applicantid'];
+	$universityid = $_REQUEST['id'];
 
 		$obj = new applicants();
 	
-				$res=$obj->updateUniversity($highschoolid,$name,$address,$startdate,$major);
+				$res=$obj->delUniversity($universityid);
 				//var_dump($res);
 				if (!$res) {
-				echo '{"result":0 ,"message": "University failed to update."}';
+				echo '{"result":0 ,"message": "Failed to remove University."}';
 			}else{
-	 			echo '{"result":1, "message": "University updated."}';
+	 			echo '{"result":1, "message": "University removed."}';
 			}
 	
 }
@@ -356,7 +343,7 @@ function getUniversity() {
 }
 
 
-function showDetails(){
+function getDetails(){
 	if (($_REQUEST['id']=="")) {
 		echo '{"result":0, "message": "applicantid was not given"}';
 		return;

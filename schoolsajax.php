@@ -23,6 +23,18 @@
 		updateSchool();
 		break;
 
+		case 5:
+		newSchool();
+		break;
+
+		case 6:
+		saveReview();
+		break;
+
+		case 7:
+		getReview();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -146,6 +158,60 @@ function updateSchool(){
 			}
 	
 }
+
+function newSchool(){
+	include_once("schools.php");
+	$obj = new schools();
+
+	$name = $_REQUEST['name'];
+	$open = $_REQUEST['open'];
+	$username = $_REQUEST['username'];
+	$pword = $_REQUEST['pword'];
+	$street = $_REQUEST['street'];
+	$town = $_REQUEST['town'];
+	$region = $_REQUEST['region'];
+	$ghanafee = $_REQUEST['ghanafee'];
+	$foreignfee = $_REQUEST['foreignfee'];
+	$paymenturl = $_REQUEST['paymenturl'];
+	$websiteurl = $_REQUEST['websiteurl'];
+
+		$result=$obj->newSchool($name,$open,$username,$pword,$street,$town,$region,$ghanafee,$foreignfee,$paymenturl,$websiteurl);
+			
+			//var_dump($result);
+
+			if (!$result) {
+				echo '{"result":0 ,"message": "Failed to add school."}';
+			}else{
+	 			echo '{"result":1, "message": "School Added."}';
+			}
+	
+}
+
+
+function saveReview(){
+
+	include_once("application.php");
+	$obj = new application();
+
+	$applicantid = $_REQUEST['applicantid'];
+	$review = $_REQUEST['review'];
+	$reviewer = $_REQUEST['reviewer'];
+	$comment = $_REQUEST['comment'];
+	$schoolid = $_SESSION['schoolid'];
+
+		$obj = new application();
+	
+				$res=$obj->saveReview($review,$reviewer,$comment,$applicantid,$schoolid);
+				//var_dump($res);
+				if (!$res) {
+				echo '{"result":0 ,"message": "Application failed to update."}';
+			}else{
+	 			echo '{"result":1, "message": "Application updated."}';
+			}
+	
+}
+
+
 
 
 ?>

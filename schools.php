@@ -59,6 +59,11 @@ class schools extends adb{
      return $this->query($strQuery);
      }
 
+     function newSchool($name='none',$open='none',$username='none',$pword='none',$street='none',$town='none',$region='none',$ghanafee='none',$foreignfee='none',$paymenturl='none',$websiteurl='none'){
+      $strQuery="insert into school set name = '$name', open = '$open', username='$username', pword='$pword',
+                street='$street', town='$town', region='$region', ghanafee='$ghanafee', foreignfee='$foreignfee', paymenturl='$paymenturl', websiteurl='$websiteurl'";
+     return $this->query($strQuery);
+     }
 
    }
 

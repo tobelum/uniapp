@@ -71,7 +71,7 @@ class application extends adb{
           return $this->query($strQuery);
      }
 
-     function saveReview($review='none',$reviewer='none',$comment='none',$schoolid='none',$applicantid='none'){
+     function saveReview($review='none',$reviewer='none',$comment='none',$applicantid='none',$schoolid='none'){
         $strQuery="update application SET review='$review',reviewer='$reviewer',comment='$comment' where applicantid='$applicantid' && schoolid='$schoolid'";
         return $this->query($strQuery);
      }

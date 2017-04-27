@@ -69,8 +69,8 @@ class applicants extends adb{
         $strQuery="select * from highschool where applicantid = '$applicantid'";
         return $this->query($strQuery);
      }
-      function updateHighSchool($highschoolid='none',$name='none',$address='none',$startyear='none',$endyear='none',$certificate='none',$language='none'){
-        $strQuery="update highschool SET name='$name',address='$address',startyear='$startyear',endyear='$endyear',certificate='$certificate',language='$language' where highschoolid='$highschoolid'";
+      function delHighSchool($highschoolid='none'){
+        $strQuery="delete from highschool where highschoolid='$highschoolid'";
         return $this->query($strQuery);
      }
       function newUniversity($name='none',$address='none',$startdate='none',$major='none',$applicantid='none'){
@@ -81,8 +81,8 @@ class applicants extends adb{
         $strQuery="select * from university where applicantid = '$applicantid'";
         return $this->query($strQuery);
      }
-      function updateUniversity($universityid='none',$name='none',$address='none',$startdate='none',$major='none'){
-        $strQuery="update university SET name='$name',address='$address',startdate='$startdate',major='$major' where universityid='$universityid'";
+      function delUniversity($universityid='none'){
+        $strQuery="delete from university where universityid='$universityid'";
         return $this->query($strQuery);
      }
 

@@ -51,7 +51,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startyear+"</td><td>"+obj.row[length-1].endyear+"</td><td>"+obj.row[length-1].certificate+"</td><td>"+obj.row[length-1].language+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='updateHighschool("+obj.row[length-1].highschoolid+")'>Edit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startyear+"</td><td>"+obj.row[length-1].endyear+"</td><td>"+obj.row[length-1].certificate+"</td><td>"+obj.row[length-1].language+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delHighschool(\""+obj.row[length-1].highschoolid+"\")'>Remove</button></td></tr>";
                     length-=1;
                 }
                 highschools.innerHTML=result;
@@ -79,7 +79,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startdate+"</td><td>"+obj.row[length-1].major+"</td><td><button type='submit' class='btn btn-info btn-fill pull-right' id='modals' data-toggle='modal' data-target='#editUniModal'>Edit</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].address+"</td><td>"+obj.row[length-1].startdate+"</td><td>"+obj.row[length-1].major+"</td><td><button type='submit' class='btn btn-danger btn-fill pull-right' onclick='delUniversity(\""+obj.row[length-1].universityid+"\")'>Remove</button></td></tr>";
                     length-=1;
                 }
                 universities.innerHTML=result;
@@ -152,32 +152,51 @@
 
         }
 
-    function editUniversityComplete(xhr, status){
-            alert("here");
+    function delUniversityComplete(xhr, status){
+            //alert("here");
             if(status!="success"){
                 alert("status is "+status);
                 return;
             }
-            alert("there");
+            //alert("there");
             var obj = $.parseJSON(xhr.responseText);
-            alert("see");
+            //alert("see");
             if(obj.result==0){
                 alert("server response: "+obj.message);
             }else{
-                alert("School has been added.");
+                alert("School has been removed.");
+                window.location=("academic.html");
             }
         }
 
-    function editUniversity(){
-            name=$("#uniname").val();
-            address=$("#uniaddress").val();
-            startdate=$("#unistart").val();
-            major=$("#unimajor").val();
+    function delUniversity(id){
+            pageUrl="applicantsajax.php?cmd=9&id="+id;
+            $.ajax(pageUrl,{async:true,complete:delUniversityComplete});
+            //prompt('url',pageUrl);
 
-            pageUrl="applicantsajax.php?cmd=9&name="+name+"&address="+address+"&startdate="+startdate+"&major="+major;
-            $.ajax(pageUrl,{async:true,complete:addUniversityComplete});
-            prompt('url',pageUrl);
-            
+        }
+
+    function delHighschoolComplete(xhr, status){
+            //alert("here");
+            if(status!="success"){
+                alert("status is "+status);
+                return;
+            }
+            //alert("there");
+            var obj = $.parseJSON(xhr.responseText);
+            //alert("see");
+            if(obj.result==0){
+                alert("server response: "+obj.message);
+            }else{
+                alert("School has been removed.");
+                window.location=("academic.html");
+            }
+        }
+
+    function delHighschool(id){
+            pageUrl="applicantsajax.php?cmd=6&id="+id;
+            $.ajax(pageUrl,{async:true,complete:delHighschoolComplete});
+            //prompt('url',pageUrl);
 
         }
 

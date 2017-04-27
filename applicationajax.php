@@ -250,56 +250,6 @@ function getCentral() {
 	
 }
 
-// function submit() {
-// 	if (($_REQUEST['schoolid']=="")) {
-// 		echo '{"result":0, "message": "Schoolid was not given"}';
-// 		return;
-// 	}
-	
-// 	include_once("application.php");
-// 	$obj = new application();
-// 	$schoolid= $_REQUEST['schoolid'];
-
-// 	$applicantid = $_SESSION['applicantid'];
-
-// 	$a = $obj->submit($applicantid,$schoolid);
-
-// 	if (!$a) {
-// 		echo '{"result":0 ,"message": "Could not submit application"}';
-// 	}
-	
-// 	else {
-// 	 echo '{"result": 1, "message": "Application submitted"}';	
-// 	}
-	
-// }
-
-function getReview() {
-	include_once("application.php");
-	$obj = new application();
-
-	$applicantid = $_SESSION['applicantid'];
-
-	$result = $obj->getCentral($applicantid);
-
-	if (!$result) {
-		echo '{"result":0 ,"message": "Could not display Application"}';
-	}
-	else {
-		$row=$obj->fetch();
-		echo '{"result":1,"row":[';
-		while($row){
-			echo json_encode($row);
-
-			$row=$obj->fetch();
-			if($row!=false){
-				echo ",";
-			}
-		}
-		echo "]}";	
-	}
-	
-}
 
 function submit() {
 	if (($_REQUEST['schoolid']=="")) {
@@ -369,6 +319,34 @@ function getPaid() {
 	
 	else {
 	 echo '{"result": 1, "message": "Payment status updated"}';	
+	}
+	
+}
+
+function getReview() {
+	include_once("application.php");
+	$obj = new application();
+
+	$applicantid = $_SESSION['applicantid'];
+	$schoolid= $_SESSION['schoolid'];
+
+	$result = $obj->getReview($applicantid,$schoolid);
+
+	if (!$result) {
+		echo '{"result":0 ,"message": "Could not display Review"}';
+	}
+	else {
+		$row=$obj->fetch();
+		echo '{"result":1,"row":[';
+		while($row){
+			echo json_encode($row);
+
+			$row=$obj->fetch();
+			if($row!=false){
+				echo ",";
+			}
+		}
+		echo "]}";	
 	}
 	
 }
