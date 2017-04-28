@@ -153,10 +153,20 @@
 
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <div class="card ">
                             <div class="content">
                                 <h4>Pie chart showing gender difference in the applicants</h4>
+                                <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="card ">
+                            <div class="content">
+                                <h4>Pie chart showing various nationalities of applicants</h4>
                                 <div id="piechart" style="width: 900px; height: 500px;"></div>
 
                             </div>

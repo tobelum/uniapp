@@ -38,7 +38,7 @@ class application extends adb{
 
     function getApplicants(){
         $strQuery="select applicant.phone, school.name,school.schoolid, applicant.applicantid, applicant.firstname, applicant.lastname,
-         application.paid from school,application,applicant where application.applicantid = applicant.applicantid && application.schoolid=school.schoolid";
+         application.paid, application.reference from school,application,applicant where application.applicantid = applicant.applicantid && application.schoolid=school.schoolid";
         return $this->query($strQuery);
      }
 
@@ -80,6 +80,10 @@ class application extends adb{
         return $this->query($strQuery);
      }
 
+     function addReference($reference='none',$applicantid='none',$schoolid='none'){
+        $strQuery="update application SET reference = '$reference' where applicantid='$applicantid' && schoolid='$schoolid'";
+        return $this->query($strQuery);
+     }
    }
 
 

@@ -5,7 +5,7 @@ $applicantid=$_SESSION['applicantid'];
 // echo $applicantid;
 
 // $target_dir = "C:/xampp/htdocs/uniapp/example_upload/uploads/";
-$target_dir = "uploads/transcripts/";
+$target_dir = "uploads/scores/";
 $original_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 // $uploadOk = 1;

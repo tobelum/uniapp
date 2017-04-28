@@ -55,7 +55,7 @@ function login(){
 	$row=$obj->fetch();
 	
 	if (!$row) {
-		echo '{"result":0 ,"message": "Login Failed"}';
+		echo '{"result":0 ,"message": "Incorrect Username or Password"}';
 	}
 	
 	else {

@@ -86,9 +86,10 @@ function signup() {
 		// mail($to,$subject,$txt,$headers);
 
 		$sms=$obj->signupsms($phone);
-	 echo '{"result":1, "message": "Applicant sucessfully registered"}';
-	 $_SESSION['applicantid']=$a['id'];	
-	 echo $_SESSION['applicantid'];
+		$email=$obj->sendEmail($email,$firstname);
+	 echo '{"result":1, "message": "Applicant sucessfully registered."}';
+	 //$_SESSION['applicantid']=$a['id'];	
+	 //echo $_SESSION['applicantid'];
 	}
 	
 }
@@ -108,7 +109,7 @@ function login(){
 	$row=$obj->fetch();
 	
 	if (!$row) {
-		echo '{"result":0 ,"message": "Login Failed"}';
+		echo '{"result":0 ,"message": "Incorrect Username or Password"}';
 	}
 	
 	else {
@@ -163,7 +164,7 @@ function fillPersonal(){
 			$parentname,$alive,$parentphone,$parentemail,$relationship,
 			$parentjob,$sponsorname,$sponsorphone,$sponsoremail);
 			
-			var_dump($sponsorphone);
+			//var_dump($sponsorphone);
 
 			if (!$result) {
 				echo '{"result":0 ,"message": "Profile failed to update."}';

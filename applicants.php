@@ -86,6 +86,13 @@ class applicants extends adb{
         return $this->query($strQuery);
      }
 
+      function sendEmail($email='none', $firstname='none'){
+        mail($email,"Thank you for registering with UniApp","Dear $firstname, Thank you for registering with UniApp. 
+          Log in with this link localhost/uniapp/index.html. We look forward to assisting you with your applications.
+          Best,
+          The UniApp Team.");
+     }
+
       function signupsms($phone){
         require './Smsgh/Api.php';
 
@@ -102,7 +109,7 @@ class applicants extends adb{
     // Send a quick message
        // var_dump($phone);
     $mesg = new Message();
-    $mesg->setContent("Thank you for registering with UniApp. Goodluck!");
+    $mesg->setContent("Thank you for registering with UniApp. Goodluck with your applications!");
     $mesg->setTo("+".$phone);
     $mesg->setFrom("UniApp");
     $mesg->setRegisteredDelivery(true);

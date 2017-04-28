@@ -46,7 +46,7 @@
                     
                     console.log(obj.message);
                 }else{
-                     alert("Kindly check your email for a confirmation link.");
+                     //alert("To complete your registeration, Kindly check your email for a confirmation link.");
                     //window.location="personal.html";
                     
                 }
@@ -62,8 +62,8 @@
                 pageUrl="applicantsajax.php?cmd=1&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&pword="+pword+"&phone="+phone;
 
                 $.ajax(pageUrl,{async:true,complete:addUserComplete});
-                alert("Thank you for registering, you can now sign in using your details.");
-                //prompt('url',pageUrl);
+                alert("To complete your registeration, Kindly check your email for a confirmation link.");
+                prompt('url',pageUrl);
            }
 
            function logUserComplete(xhr,status){

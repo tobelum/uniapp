@@ -46,7 +46,7 @@
                 var length = obj.row.length;
 
                 while(length>0){
-                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].open+"</td><td>"+obj.row[length-1].street+", "+obj.row[length-1].town+", "+obj.row[length-1].region+"</td><td><a class='btn btn-info btn-fill pull-right' href='\""+obj.row[length-1].websiteurl+"\"' target='_blank'> Visit Website</a></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='addSchool("+obj.row[length-1].schoolid+")'>Add School</button></td></tr>";
+                    result+="<tr><td>"+obj.row[length-1].name+"</td><td>"+obj.row[length-1].open+"</td><td>"+obj.row[length-1].street+", "+obj.row[length-1].town+", "+obj.row[length-1].region+"</td><td><a class='btn btn-info btn-fill pull-right' href='"+obj.row[length-1].websiteurl+"' target='_blank'> Visit Website</a></td><td><button type='submit' class='btn btn-info btn-fill pull-right' onclick='addSchool("+obj.row[length-1].schoolid+")'>Add School</button></td></tr>";
                     length-=1;
                 }
                 viewSchools.innerHTML=result;

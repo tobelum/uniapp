@@ -55,6 +55,10 @@
 		getPaid();
 		break;
 
+		case 13;
+		addReference();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
@@ -347,6 +351,31 @@ function getReview() {
 			}
 		}
 		echo "]}";	
+	}
+	
+}
+
+function addReference() {
+	if (($_REQUEST['schoolid']=="")||($_REQUEST['reference']=="")) {
+		echo '{"result":0, "message": "Not all info was given"}';
+		return;
+	}
+	
+	include_once("application.php");
+	$obj = new application();
+	$reference=$_REQUEST['reference'];
+	$schoolid= $_REQUEST['schoolid'];
+
+	$applicantid = $_SESSION['applicantid'];
+
+	$a = $obj->addReference($reference,$applicantid,$schoolid);
+
+	if (!$a) {
+		echo '{"result":0 ,"message": "Could not submit reference"}';
+	}
+	
+	else {
+	 echo '{"result": 1, "message": "Reference submitted"}';	
 	}
 	
 }
