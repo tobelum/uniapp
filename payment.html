@@ -87,7 +87,7 @@
 
     function addReferenceComplete(xhr, status){
                 if(status!="success"){
-                    alert("status is "+status);
+                    //alert("status is "+status);
                     alert("Reference code could not be submitted");
                     return;
                 }
@@ -99,14 +99,14 @@
                     alert("server response: "+obj.message);
                     
                 }else{   
-                    alert(obj.message); 
+                    //alert(obj.message); 
                     alert("Reference code has been submitted. Payment status will be updated in the next 24 hours.");
                     window.location="payment.html";
 
             }
     }
 
-    function addReference(schoolid){
+    function addReference(){
         reference=$("#code").val();
         schoolid=$("#school").val();
         pageUrl = "applicationajax.php?cmd=13&schoolid="+schoolid+"&reference="+reference;

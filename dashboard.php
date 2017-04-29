@@ -45,25 +45,25 @@
           // ['Watch TV', 2],
           // ['Sleep',    7]
 
-<?php   
-    session_start();
+            <?php   
+                session_start();
 
-    $obj=new schools;
-    $schoolid = $_SESSION['schoolid'];
-    $result = $obj->getGender($schoolid);
+                $obj=new schools;
+                $schoolid = $_SESSION['schoolid'];
+                $result = $obj->getGender($schoolid);
 
-    $array = array();
+                $array = array();
 
-    while($row = $obj->fetch()){
-        $array[] = $row;
-    }
-?>
-        ['Gender', 'Applicants'],
-<?php
-    foreach($array as $row){
-        print ("['".$row['gender']."',".$row['count']."],");
-    }
-?>
+                while($row = $obj->fetch()){
+                    $array[] = $row;
+                }
+            ?>
+                    ['Gender', 'Applicants'],
+            <?php
+                foreach($array as $row){
+                    print ("['".$row['gender']."',".$row['count']."],");
+                }
+            ?>
         ]);
 
         var options = {
@@ -74,6 +74,47 @@
 
         chart.draw(data, options);
       }
+
+      // function drawAnotherChart() {
+
+      //   var data = google.visualization.arrayToDataTable([
+      //     // ['Task', 'Hours per Day'],
+      //     // ['Work',     11],
+      //     // ['Eat',      2],
+      //     // ['Commute',  2],
+      //     // ['Watch TV', 2],
+      //     // ['Sleep',    7]
+
+      //       <?php   
+      //           session_start();
+
+      //           $obj=new schools;
+      //           $schoolid = $_SESSION['schoolid'];
+      //           $result = $obj->getNationality($schoolid);
+
+      //           $array = array();
+
+      //           while($row = $obj->fetch()){
+      //               $array[] = $row;
+      //           }
+      //       ?>
+      //               ['Nationality', 'Applicants'],
+      //       <?php
+      //           foreach($array as $row){
+      //               print ("['".$row['nationality']."',".$row['count']."],");
+      //           }
+      //       ?>
+      //   ]);
+
+      //   var options = {
+      //     title: 'Nationality'
+      //   };
+
+      //   var chart = new google.visualization.PieChart(document.getElementById('anotherpiechart'));
+
+      //   chart.draw(data, options);
+      // }
+
     </script>
 
 </head>
@@ -163,15 +204,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-10">
+<!--                     <div class="col-md-10">
                         <div class="card ">
                             <div class="content">
                                 <h4>Pie chart showing various nationalities of applicants</h4>
-                                <div id="piechart" style="width: 900px; height: 500px;"></div>
+                                <div id="anotherpiechart" style="width: 900px; height: 500px;"></div>
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

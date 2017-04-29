@@ -37,6 +37,11 @@ class schools extends adb{
         return $this->query($strQuery);
      }
 
+     function getNationality($schoolid='none'){
+        $strQuery = "SELECT nationality,count(*) count from applicant, 
+        application where application.schoolid='$schoolid' && applicant.applicantid =application.applicantid group by nationality";
+        return $this->query($strQuery);
+     }
      // function getNationality($schoolid='none'){
 
      //    return $this->query($strQuery);
